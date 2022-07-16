@@ -9,7 +9,7 @@
         </nav>
     </div>
 
-    <a href="<?= base_url('admin/master/produk/produk_add') ?>" class="btn btn-info kanan"><i class="ti-plus"> </i> Tambah Data</a>
+    <a href="<?= base_url('internal/produk/produk_add') ?>" class="btn btn-info kanan"><i class="ti-plus"> </i> Tambah Data</a>
 
 </div> 
 

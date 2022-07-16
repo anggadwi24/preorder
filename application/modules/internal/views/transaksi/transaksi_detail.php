@@ -11,70 +11,102 @@
 
 </div> 
 
-<div class="card p-3">
-    <div class="row">
-        <div class="col-md-12">
-            <h4>Detail Produk</h4>
-            <hr>
-        </div>
-        <div class="col-md-5 text-center">
-            <img class="img-fluid" src="<?= base_url('upload/docs/logo.png') ?>" alt="" width="60%">
-        </div>
-        <div class="col-md-7">
+<div class="row">
+    
+    <div class="col-md-6">
+        
+        <div class="card">
+            <div class="card-header">
+                <h4>Detail Pemesan</h4>
+            </div>
             <div class="card-body">
-                <div class="row">
-                    <div class="col-md-10 ml-auto mr-auto">
-                        <div class="m-t-30">
-                            <h4 class="card-title">Judul</h4>
-                            <p>desc</p>
-                        </div>
-                    </div>
-                </div>
+                
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th scope="row" width="40%">Nama</th>
+                            <td>anggajawa</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" width="40%">Email</th>
+                            <td>anggajawa@gmail.com</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" width="40%">No Telp</th>
+                            <td>087625757358</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" width="40%">Alamat</th>
+                            <td>Jl. Tukad Jawa no 10, Denpasar Selatan, Denpasar, Bali </td>
+                        </tr>
+                        <tr>
+                            <th scope="row" width="40%">Pengiriman</th>
+                            <td>JNE - OKE</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" width="40%">Status Pembayaran</th>
+                            <td>Belum Lunas</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th scope="row" width="40%">Ongkos Kirim</th>
+                            <td>20k</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" width="40%">Total Produk</th>
+                            <td>50k</td>
+                        </tr>
+                        <tr>
+                            <th scope="row" width="40%">Total</th>
+                            <td>70k</td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+
             </div>
         </div>
-    </div>
-</div>
 
-<div class="card">
-    <div class="card-header">
-        <h4>Detail Pemesan</h4>
     </div>
-    <div class="card-body">
-        <div class="table-overflow">
-            <table id="dt-opt" class="table table-hover table-xl">
-                <thead>
-                    <tr>
-                        <th>Nama</th>
-                        <th>Telp</th>
-                        <th>Alamat</th>
-                        <th>Ekspedisi</th>
-                        <th>Status Pembayaran</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <div class="list-media">
-                                <div class="list-item">
-                                    <div class="media-img">
-                                        <img class="rounded" src="" alt="">
-                                    </div>
-                                    <div class="info">
-                                    <span class="title">Anggajawa</span>
-                                    <span class="sub-title">anggajawacintabanyuwangi@gmail.com</span>
+    <div class="col-md-6">
+        
+        <div class="card">
+            <div class="card-header">
+                <h4>Detail Produk</h4>
+            </div>
+            <div class="card-body">
+                
+                <div class="card p-4">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <img class="img-fluid" src="<?= base_url('upload/docs/logo.png') ?>" alt="">
+                        </div>
+                        <div class="col-md-7">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-10 ml-auto mr-auto">
+                                        <div class="m-t-30">
+                                            <h3 class="card-title">Judul</h3>
+                                            <h5 class="card-title">Harga : --</h5>
+                                            <p>DESc</p>
+                                            
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </td>
-                        <td>00000000000</td>
-                        <td>JL. tukad jawa no 10 , jakarta selatan, DKI Jakarta</td>
-                        <td>JNE</td>
-                        <td>Belum Lunas</td>
-                        
-                    </tr>
+                        </div>
+                    </div>
+                </div>
 
-                </tbody>
-            </table>
-        </div> 
-    </div>       
-</div>   
+
+            </div>
+
+    </div>
+
+    </div>
+
+</div>

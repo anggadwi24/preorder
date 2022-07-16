@@ -58,7 +58,7 @@
                                             <a href="<?= base_url() ?>" class="nav-link">Home</a>
                                         </li>
                                         <li class="level">
-                                            <a href="<?= base_url('produk') ?>" class="nav-link">Produk</a>
+                                            <a href="<?= base_url('product') ?>" class="nav-link">Produk</a>
                                         </li>
                                         <li class="level">
                                             <a href="<?= base_url('about')  ?>" class="nav-link">Tentang Kami</a>
