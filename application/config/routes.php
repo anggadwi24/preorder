@@ -56,6 +56,8 @@ $route['contact'] = 'site/contact';
 $route['cart'] = 'site/cart';
 $route['checkout'] = 'site/checkout';
 $route['profile'] = 'site/profile';
+$route['product/detail'] = 'site/product/detail';
+
 
 
 

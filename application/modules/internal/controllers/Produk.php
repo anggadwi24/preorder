@@ -18,13 +18,13 @@ class Produk extends MX_Controller
 
 	}
 
-	public function produk_add()
+	public function add()
 	{
 		$data['title'] = 'Tambah Produk';
 		$this->template->load('template','produk/produk_add',$data);
 	}
 
-	public function produk_edit()
+	public function edit()
 	{
 		$data['title'] = 'Edit Produk';
 		$this->template->load('template','produk/produk_edit',$data);
