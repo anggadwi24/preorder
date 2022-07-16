@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Auth_admin extends MX_Controller 
+class Auth extends MX_Controller 
 {
 
 	public function __construct()
@@ -12,7 +12,7 @@ class Auth_admin extends MX_Controller
 
 	public function index()
 	{
-		$this->load->view('admin/login');
+		$this->load->view('internal/login');
 	}
 
 	

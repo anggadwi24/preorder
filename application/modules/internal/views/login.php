@@ -8,22 +8,22 @@
     <title>Applicator - Admin Dashboard Template</title>
 
     <!-- Favicon -->
-    <link rel="apple-touch-icon" href="<?= base_url() ?>assets_admin/images/logo/apple-touch-icon.png">
-    <link rel="shortcut icon" href="<?= base_url() ?>assets_admin/images/logo/favicon.png">
+    <link rel="apple-touch-icon" href="<?= base_url() ?>template/admin/images/logo/apple-touch-icon.png">
+    <link rel="shortcut icon" href="<?= base_url() ?>template/admin/images/logo/favicon.png">
 
     <!-- core dependcies css -->
-    <link rel="stylesheet" href="<?= base_url() ?>assets_admin/vendor/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="<?= base_url() ?>assets_admin/vendor/PACE/themes/blue/pace-theme-minimal.css" />
-    <link rel="stylesheet" href="<?= base_url() ?>assets_admin/vendor/perfect-scrollbar/css/perfect-scrollbar.min.css" />
+    <link rel="stylesheet" href="<?= base_url() ?>template/admin/vendor/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="<?= base_url() ?>template/admin/vendor/PACE/themes/blue/pace-theme-minimal.css" />
+    <link rel="stylesheet" href="<?= base_url() ?>template/admin/vendor/perfect-scrollbar/css/perfect-scrollbar.min.css" />
 
     <!-- page css -->
 
     <!-- core css -->
-    <link href="<?= base_url() ?>assets_admin/css/font-awesome.min.css" rel="stylesheet">
-    <link href="<?= base_url() ?>assets_admin/css/themify-icons.css" rel="stylesheet">
-    <link href="<?= base_url() ?>assets_admin/css/materialdesignicons.min.css" rel="stylesheet">
-    <link href="<?= base_url() ?>assets_admin/css/animate.min.css" rel="stylesheet">
-    <link href="<?= base_url() ?>assets_admin/css/app.css" rel="stylesheet">
+    <link href="<?= base_url() ?>template/admin/css/font-awesome.min.css" rel="stylesheet">
+    <link href="<?= base_url() ?>template/admin/css/themify-icons.css" rel="stylesheet">
+    <link href="<?= base_url() ?>template/admin/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="<?= base_url() ?>template/admin/css/animate.min.css" rel="stylesheet">
+    <link href="<?= base_url() ?>template/admin/css/app.css" rel="stylesheet">
 </head>
 
 <body>
@@ -61,21 +61,21 @@
         </div>
     </div>
 
-    <!-- build:js <?= base_url() ?>assets_admin/js/vendor.js -->
+    <!-- build:js <?= base_url() ?>template/admin/js/vendor.js -->
     <!-- core dependcies js -->
-    <script src="<?= base_url() ?>assets_admin/vendor/jquery/dist/jquery.min.js"></script>
-    <script src="<?= base_url() ?>assets_admin/vendor/popper.js/dist/umd/popper.min.js"></script>
-    <script src="<?= base_url() ?>assets_admin/vendor/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="<?= base_url() ?>assets_admin/vendor/PACE/pace.min.js"></script>
-    <script src="<?= base_url() ?>assets_admin/vendor/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>     
-    <script src="<?= base_url() ?>assets_admin/vendor/d3/d3.min.js"></script>
+    <script src="<?= base_url() ?>template/admin/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="<?= base_url() ?>template/admin/vendor/popper.js/dist/umd/popper.min.js"></script>
+    <script src="<?= base_url() ?>template/admin/vendor/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="<?= base_url() ?>template/admin/vendor/PACE/pace.min.js"></script>
+    <script src="<?= base_url() ?>template/admin/vendor/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>     
+    <script src="<?= base_url() ?>template/admin/vendor/d3/d3.min.js"></script>
     <!-- endbuild -->
 
-    <!-- build:js <?= base_url() ?>assets_admin/js/app.min.js -->
+    <!-- build:js <?= base_url() ?>template/admin/js/app.min.js -->
     <!-- core js -->
-    <script src="<?= base_url() ?>assets_admin/js/app.js"></script>
+    <script src="<?= base_url() ?>template/admin/js/app.js"></script>
     <!-- configurator js -->
-    <script src="<?= base_url() ?>assets_admin/js/configurator.js"></script>
+    <script src="<?= base_url() ?>template/admin/js/configurator.js"></script>
     <!-- endbuild -->
 
     <!-- page js -->
