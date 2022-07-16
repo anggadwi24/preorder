@@ -97,6 +97,12 @@
                                 <li role="separator" class="divider"></li>
                                 <li>
                                     <a href="">
+                                        <i class="ti-user p-r-10"></i>
+                                        <span>Profile</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="">
                                         <i class="ti-power-off p-r-10"></i>
                                         <span>Logout</span>
                                     </a>

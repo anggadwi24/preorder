@@ -17,5 +17,12 @@ class Main extends MX_Controller {
 		// $this->template->load('template_admin','admin/dashboard');
 	}
 
+	public function profile()
+	{
+		$data['title'] = 'Internal';
+		$this->template->load('template','profile',$data);
+		// $this->template->load('template_admin','admin/dashboard');
+	}
+
 	
 }

@@ -91,8 +91,8 @@
 	                  </div>
 	                  <div class="col-12">
 	                  	<hr>
-	                    <div class="new-account align-center mt-20"> <span>Already have an account with us</span> 
-	                    	<a class="link" title="Login Here" href="login.html">Login Here</a> </div>
+	                    <div class="new-account align-center mt-20"> <span>Sudah memiliki akun</span> 
+	                    	<a class="link" title="Login Here" href="login.html">Login disini</a> </div>
 	                  </div>
 	                </div>
 	              </form>

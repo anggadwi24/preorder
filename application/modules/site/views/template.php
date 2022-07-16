@@ -19,21 +19,7 @@
         <!-- <div id="preloader"></div> -->
         <!-- End preloader -->
 
-        <!-- Search Screen start -->
-        <div class="sidebar-search-wrap">
-            <div class="sidebar-table-container">
-                <div class="sidebar-align-container">
-                    <div class="search-closer right-side"></div>
-                    <div class="search-container">
-                      <form method="get" id="search-form">
-                        <input type="text" id="s" class="search-input" name="s" placeholder="Start Searching">
-                      </form>
-                      <span>Search and Press Enter</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Search Screen end -->
+        
 
         <div class="main">
             <!-- Header start -->
@@ -71,9 +57,7 @@
                                 </div>
                                 <div class="header-right-link">
                                   <ul>
-                                    <li class="search-box">
-                                      <a href="#"><span></span></a>
-                                    </li>
+                                    
                                     <li class="account-icon"> 
                                         <a href="#"><span></span></a>
                                         <div class="header-link-dropdown account-link-dropdown">

@@ -35,6 +35,26 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="form-row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Harga Pokok</label>
+                                            <input type="text" class="form-control" name="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Harga Jual</label>
+                                            <input type="text" class="form-control" name="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Berat (gr)</label>
+                                            <input type="text" class="form-control" name="">
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <label class="control-label">Desc</label>
                                     <textarea class="form-control" name=""></textarea>

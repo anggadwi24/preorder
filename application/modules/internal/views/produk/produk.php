@@ -9,7 +9,7 @@
         </nav>
     </div>
 
-    <a href="<?= base_url('internal/produk/produk_add') ?>" class="btn btn-info kanan"><i class="ti-plus"> </i> Tambah Data</a>
+    <a href="<?= base_url('internal/produk/add') ?>" class="btn btn-info kanan"><i class="ti-plus"> </i> Tambah Data</a>
 
 </div> 
 
@@ -20,6 +20,7 @@
                 <thead>
                     <tr>
                         <th>Produk</th>
+                        <th>Harga Jual</th>
                         <th>Status</th>
                         <th></th>
                     </tr>
@@ -39,6 +40,7 @@
                                 </div>
                             </div>
                         </td>
+                        <td>200000</td>
                         <td>Pre or close</td>
                         <td class="font-size-18">
                             
@@ -88,6 +90,14 @@
                                                             <p class="text-opacity m-b-20 font-size-13">mini desc</p>
                                                             <p>DESC</p>
                                                             <div class="d-flex flex-row justify-content-center">
+                                                                <div class="p-v-20 p-h-15 text-center">
+                                                                    <span class="font-size-18 text-info text-semibold">-</span>
+                                                                    <small class="d-block">Harga Pokok</small>
+                                                                </div>
+                                                                <div class="p-v-20 p-h-15 text-center">
+                                                                    <span class="font-size-18 text-info text-semibold">-</span>
+                                                                    <small class="d-block">Harga Jual</small>
+                                                                </div>
                                                                 <div class="p-v-20 p-h-15 text-center">
                                                                     <span class="font-size-18 text-info text-semibold">-</span>
                                                                     <small class="d-block">Status</small>

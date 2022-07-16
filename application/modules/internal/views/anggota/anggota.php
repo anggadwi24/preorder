@@ -23,6 +23,7 @@
                         <th>Nama</th>
                         <th>No Telp</th>
                         <th>Alamat</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,6 +34,7 @@
                         </td>
                         <td>081</td>
                         <td>Jl.bbb</td>
+                        <td>Aktif</td>
                     </tr>
                 </tbody>
             </table>
