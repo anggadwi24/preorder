@@ -1,0 +1,97 @@
+/*----------------------------------------
+  41. Noty
+----------------------------------------*/
+
+.noty_bar {
+    padding: 15px;
+    overflow: hidden;
+    border-radius: 2px;
+    position: relative;
+    font-weight: 500;
+    margin-bottom: 3px;
+
+    .noty_body {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .noty_buttons {
+        padding: 10px;
+    }
+}
+
+.noty_type_alert,
+.noty_type_notification {
+    background-color: $default-white;
+    border-bottom: 1px solid $border-color;
+    color: $default-text-color;
+}
+
+.noty_type_warning {
+    color: $default-warning;
+    background-color: lighten($default-warning, 40%);
+}
+
+.noty_type_error {
+    color: $default-danger;
+    background-color: lighten($default-danger, 39%);
+}
+
+.noty_type_info,
+.noty_type_information {
+    color: $default-info;
+    background-color: lighten($default-info, 47%);
+}
+
+.noty_type_success {
+    color: $default-success;
+    background-color: lighten($default-success, 45%);
+}
+
+.noty_type_confirm {
+    color: $default-primary;
+    background-color: lighten($default-primary, 33%);
+}
+
+#noty_top_layout_container {
+    top: $header-height !important;
+    right: 0px !important;
+    left: auto !important;
+    width: 100% !important;
+    margin-left: 30px !important;
+    padding-left: $offscreen-size !important;
+    z-index: 1 !important;
+}
+
+#noty_bottom_layout_container {
+    bottom: 0px !important;
+    right: 0px !important;
+    left: auto !important;
+    width: 100% !important;
+    margin-left: 30px !important;
+    padding-left: 280px !important;
+    z-index: 1 !important;
+}
+
+#noty_topRight_layout_container,
+#noty_topLeft_layout_container  {
+    top: 70px !important;
+}
+
+#noty_topLeft_layout_container,
+#noty_bottomLeft_layout_container {
+    left: 305px !important;
+}
+
+
+.noty-animation {
+    animation-duration: 0.2s;
+    -webkit-animation-duration: 0.2s;
+    @include transition(all 0.2s ease); 
+
+    &.i-am-closing-now {
+        opacity: 0;
+        visibility: hidden;  
+    }
+}
+

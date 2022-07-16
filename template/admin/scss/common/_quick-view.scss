@@ -1,0 +1,134 @@
+/*----------------------------------------
+  5. Quick View
+----------------------------------------*/
+
+.quick-view {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background-color: $default-white;
+	width: 300px;
+	height: calc(100% - #{$header-height});
+	border-left: 1px solid $border-color;
+	margin: 0px;
+	margin-top: $header-height;
+	overflow: hidden;
+	z-index: 1030;
+	@include transform(translateX(300px));	
+	@include transition(all 0.2s ease-out); 
+	
+	@include screen-mobile {
+		width: 270px;
+	}
+
+	.nav-tabs {
+		border-bottom: 1px solid $border-color;
+		position: absolute;
+		width: 100%;
+
+		>li {
+			
+			&.active {
+				
+				>a {
+					color: $default-dark;
+					background-color: transparent;
+					border: 0px;
+					border-bottom-color: transparent;
+				
+					&:hover,
+					&:focus {
+						color: $default-dark;
+						background-color: transparent;
+						border: 0px;
+						border-bottom-color: transparent;
+					}
+				}
+
+				.nav-link {
+					border-bottom: 0px;
+				}
+			}
+			
+			>a {
+				margin-right: 2px;
+				line-height: 1.4;
+				border-radius: 0;
+				color: $default-text-color;
+				padding:0px 20px;
+				line-height: 55px;
+				min-height: 55px;
+				font-weight: bold;
+				@include screen-mobile {
+					padding:0px 15px;
+				}	
+				
+				&:hover, 
+				&:focus {
+					background-color: transparent;
+					color: $default-dark;
+				}
+			}
+		}
+	}
+	
+	.tab-content {
+		position: absolute;
+		width: 100%;
+		margin-top: 55px;
+		max-height: calc(100% - 55px);
+		overflow-y: auto;
+		
+		.tab-pane {
+			height: 100%;
+		}
+	}
+	.quick-view-chat {
+		padding: 15px 0px;
+		position: relative;
+		height: calc(100% - #{$header-height});
+
+		.quick-view-conversation {
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			top: 0px;
+			right: -300px;
+			background-color: $default-white;
+			@include transition(all 0.1s ease-out);
+
+			.quick-view-conversation-body {
+				height: calc(100% - 115px);
+				overflow-y: auto;
+			}
+		}
+
+		&.conversation-expand {
+			.quick-view-conversation {
+				right: -0px;
+			}
+		}
+	}	
+}
+
+.quick-view-expand {
+
+	.quick-view {
+		@include transform(translateX(0px));	
+	}
+}
+
+.quick-view-backdrop {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: transparent;
+	cursor: pointer;
+	@include background-opacity($default-dark, 0.5); 
+	z-index: 1010;
+}

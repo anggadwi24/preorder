@@ -1,0 +1,89 @@
+/*----------------------------------------
+  18. Page Title
+----------------------------------------*/
+
+.page-link {
+	border: 1px solid transparent;
+	border-radius: 5px;
+	padding: 0.4rem 0.7rem;
+	margin: 0px 2.5px;
+	color: $default-text-color;
+	@include transition(all 0.3s ease-in-out); 
+
+	&:hover {
+		color: $default-success;
+		text-decoration: none;
+		background-color: transparent;
+		border-color: transparent;
+	}
+
+	&:focus {
+		box-shadow: none;
+	}
+}
+
+.page-item {
+
+	&.disabled {
+		.page-link {
+			color: lighten($default-text-color, 25%);
+			border-color: transparent;
+		}
+	}
+
+	&.active {
+		.page-link {
+			background: $gradient-success;
+			border-color: transparent;
+		}
+	}
+}
+
+.pagination {
+
+	@each $type in $contextual-loop {
+		&.#{nth($type, 5)} {
+			.page-item {
+				&.active {
+					.page-link {
+						background: #{nth($type, 1)};
+						border-color: transparent;
+	
+						&:hover {
+							color: $default-white;
+						}
+					}
+				}
+	
+				.page-link {
+					&:hover {
+						color: #{nth($type, 1)};
+					}
+				}
+			}	
+		}
+	}
+
+	@each $type in $gradient-loop {
+		&.#{nth($type, 6)} {
+			.page-item {
+				&.active {
+					.page-link {
+						background: #{nth($type, 1)};
+						border-color: transparent;
+	
+						&:hover {
+							color: $default-white;
+						}
+					}
+				}
+	
+				.page-link {
+					&:hover {
+						color: #{nth($type, 2)};
+					}
+				}
+			}	
+		}
+	}
+}

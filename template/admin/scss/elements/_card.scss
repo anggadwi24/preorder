@@ -1,0 +1,279 @@
+/*----------------------------------------
+  17. Card
+----------------------------------------*/
+
+.card {
+	position: relative;
+	background-color: $default-white;
+	margin-bottom: 30px;
+	border: 1px solid $border-color;
+	border-radius: 0px;
+	@include transition(all 0.3s ease-in-out); 
+	
+	
+	&.bg-primary, .bg-primary, 
+	&.bg-success, .bg-success,
+	&.bg-info, .bg-info,
+	&.bg-warning, .bg-warning,
+	&.bg-danger, .bg-danger,
+	&.bg-gradient-primary, .bg-gradient-primary,
+	&.bg-gradient-success, .bg-gradient-success,
+	&.bg-gradient-info, .bg-gradient-info,
+	&.bg-gradient-warning, .bg-gradient-warning,
+	&.bg-gradient-danger, .bg-gradient-danger
+		{
+		color: darken($default-white, 3%);
+		
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			color: $default-white;
+		}
+		
+		p {
+			color: darken($default-white, 3%);
+		}
+
+		.card-header {
+			border-color:  rgba(255,255,255,.3) !important;
+		}
+
+		.card-footer {
+			border-top: 1px solid rgba(255,255,255,.2);
+		}
+	}
+
+	&.card-shadow {
+		@include box-shadow(0, 7px, 20px, 2px, rgba(0, 0, 0, 0.2)); 
+	}
+}
+
+.card-header {
+	padding: 15px 25px;
+	position: relative;
+	background-color: transparent;
+	border-bottom: 0px;
+	min-height: 55px;
+	
+	.card-title {
+		margin-bottom: 0px;
+		display: inline-block;
+	}
+
+	p {
+		padding-top: 8px;
+		margin-bottom: 0px;
+	}
+
+	&:first-child {
+		border-radius: 0px;
+	}
+}
+
+.card-body {
+	padding: 25px;
+	position: relative;
+}
+
+.card-footer {
+	position: relative;
+	padding: 10px 15px 10px 15px;
+	min-height: 55px;
+	border-top: 1px solid $border-color;
+	background-color: transparent;
+	
+	.btn {
+		margin-bottom: 0px;
+	}
+}
+
+.card-toolbar {
+	float: right;
+	
+	ul {
+		list-style: none;
+		padding-left: 0px;
+
+		> li {
+			display: inline-block;
+			
+			> a,
+			> .btn {
+				margin-bottom: 0px;
+				margin-right: 10px; 
+				display: block;
+			}
+
+			> .btn {
+				padding: 7px 15px;
+				font-size: 13px;
+			}
+		}
+	}
+}
+
+.bg-overlay {
+	
+	> .card-toolbar {
+		position: absolute;
+		right: 15px;
+		top: 10px;
+	}
+}
+
+.card-title {
+	color: $default-dark;
+	margin-top: 0px;
+	margin-bottom: 15px;
+}
+
+.card-img-top {
+	border-top-left-radius: 0px; 
+    border-top-right-radius: 0px; 
+}
+
+.card-refresh {
+
+	&:before {
+		content: "";
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		width: 100%;
+		height: 100%;
+		z-index: 4;
+		@include background-opacity($default-white, 0.7); 
+	}
+
+	&:after {
+		content:"";
+		position: absolute;
+		top: calc(50% - 20px);
+		left: calc(50% - 20px);
+		border: 3px solid $border-color; 
+	    border-top: 3px solid $default-success; 
+	    border-radius: 50%;
+	    width: 40px;
+	    height: 40px;
+	    z-index:  5;		
+	    @include animation('spin 1.2s linear infinite') ;
+	    @include transform(translateX(-50%) translateY(-50%));
+	}
+}
+
+.draggable-item {
+	cursor: move;
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+}
+
+@include keyframes(spin) {0% { transform: rotate(0); } 100% { transform: rotate(360deg); }} 
+
+a {
+	&.card {
+		display: block;
+
+		&:hover,
+		&:focus {
+			@include box-shadow(0, 7px, 15px, rgba(0, 0, 0, 0.075)); 
+		}
+	}
+}
+
+.bg-overlay {
+	position: relative;
+	overflow: hidden;	
+	color: darken($default-white, 5%);
+	
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		color: $default-white;
+	}
+	
+	p {
+		color: darken($default-white, 5%);
+	}
+	
+	&:before {
+		content:"";
+		position: absolute;
+		background: #0f0f17;
+		opacity: 0.5;
+		width: 100%;
+		height: 100%;
+		top: 0px;
+		left: 0px;
+		z-index: 2
+	}
+
+	> div {
+		z-index: 3;
+	}
+
+	.btn-default {
+		color: $default-white;
+
+		&:hover,
+		&:focus {
+			color: $default-dark;
+		}
+	}
+
+	&.primary {
+		&:before {
+			background: $default-primary;
+			opacity: 0.6;
+		}	
+	}
+
+	&.primary-gradient {
+		&:before {
+			background: $gradient-primary;
+			opacity: 0.8;
+		}	
+	}
+
+	&.success-gradient {
+		&:before {
+			background: $gradient-success;
+			opacity: 0.8;
+		}	
+	}
+
+	&.info-gradient {
+		&:before {
+			background: $gradient-info;
+			opacity: 0.7;
+		}	
+	}
+
+	&.warning-gradient {
+		&:before {
+			background: $gradient-warning;
+			opacity: 0.7;
+		}	
+	}
+
+	&.danger-gradient {
+		&:before {
+			background: $gradient-danger;
+			opacity: 0.7;
+		}	
+	}
+}
+
+.card-collapse-btn {
+	@include transition(all 0.4s ease-in-out); 
+
+	&.active {
+		@include transform(rotate(180deg));
+	}
+}

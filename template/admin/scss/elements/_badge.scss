@@ -1,0 +1,187 @@
+/*----------------------------------------
+  16. Badge
+----------------------------------------*/
+
+.badge {
+	padding: 5px 7px;
+    font-size: 80%;
+    font-weight: 500;
+    line-height: 1;    
+}
+
+.badge-default {
+    color: $default-dark;
+    background-color: transparent;
+    border: 1px solid darken($border-color,5%);
+
+    &[href] {
+        &:focus,
+        &:hover {
+            background-color: darken($default-white, 3%);
+            color: $default-dark;
+        }
+    }
+}
+
+.badge-primary {
+    background-color: $default-primary;
+
+    &[href] {
+        &:focus,
+        &:hover {
+            background-color: lighten($default-primary, 5%);
+        }
+    }
+}
+
+.badge-success {
+    background-color: $default-success;
+
+    &[href] {
+        &:focus,
+        &:hover {
+            background-color: lighten($default-success, 5%);
+        }
+    }
+}
+
+.badge-info {
+    background-color: $default-info;
+
+    &[href] {
+        &:focus,
+        &:hover {
+            background-color: lighten($default-info, 5%);
+        }
+    }
+}
+
+.badge-warning {
+    color: $default-white;
+    background-color: $default-warning;
+
+    &[href] {
+        &:focus,
+        &:hover {
+            color: $default-white;
+            background-color: lighten($default-warning, 5%);
+        }
+    }
+}
+
+.badge-danger {
+    background-color: $default-danger;
+
+    &[href] {
+        &:focus,
+        &:hover {
+            background-color: lighten($default-danger, 5%);
+        }
+    }
+}
+
+.badge-gradient-primary {
+    color: $default-white;
+    background: $gradient-primary;
+}
+
+.badge-gradient-success {
+    color: $default-white;
+    background: $gradient-success;
+}
+
+.badge-gradient-info {
+    color: $default-white;
+    background: $gradient-info;
+}
+
+.badge-gradient-warning {
+    color: $default-white;
+    background: $gradient-warning;
+}
+
+.badge-gradient-danger {
+    color: $default-white;
+    background: $gradient-danger;
+}
+
+.badge-xl {
+    padding: 9px 15px;
+    font-size: 100%;
+}
+
+.badge-lg {
+    padding: 8px 13px;
+    font-size: 90%;
+}
+
+
+.badge-sm {
+    padding: 3px 5px;
+    font-size: 75%;
+}
+
+.status {
+	width: 10px;
+    height: 10px;
+    background-color: $default-white;
+    border-radius: 50px;
+    border: 3px solid;
+    border-color:  darken($border-color, 15%);
+    display: inline-block;
+
+    &.primary {
+    	border-color: $default-primary;	
+    }
+
+    &.info {
+    	border-color: $default-info;	
+    }
+
+    &.online,
+    &.success {
+    	border-color: $default-success;	
+    }
+
+    &.busy,
+    &.danger {
+    	border-color: $default-danger;	
+    }
+
+    &.away,
+    &.warning {
+    	border-color: $default-warning;	
+    }
+
+    &.gradient {
+        border: 0px;
+        background: $default-gray;
+
+        &.primary {
+            background: $gradient-primary;
+        }
+
+        &.info {
+            background: $gradient-info;
+        }
+
+        &.online,
+        &.success {
+            background: $gradient-success;
+        }
+
+        &.away,
+        &.warning {
+            background: $gradient-warning;
+        }
+        
+        &.busy,
+        &.danger {
+            background: $gradient-danger;
+        }
+    }
+}
+
+
+
+

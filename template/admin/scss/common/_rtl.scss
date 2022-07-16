@@ -1,0 +1,221 @@
+/*----------------------------------------
+  10. RTL
+----------------------------------------*/
+
+.rtl {
+	text-align: right;
+
+	.side-nav {
+		right: 0px;
+		left: auto;
+
+		@include screen-tablet {
+			right: -280px;
+		}
+
+		@include screen-laptop-only {
+			&:hover {
+				.side-nav-inner .side-nav-menu > li > a .icon-holder {
+					float: right;
+					margin-left: 14px;
+				}
+			}
+		}	
+ 
+		.side-nav-inner {
+
+			.side-nav-menu {
+				border-right:0px;
+				border-left: 1px solid $border-color;
+			
+				> li {
+					> a {    
+
+	   					.icon-holder {
+	   						float: right;
+		    				margin-right: 0px;
+		   					margin-left: 14px;
+	   					}
+					}
+
+					&.dropdown {
+						.arrow {
+							line-height: 28px;
+							right: auto;
+							left: 30px;
+
+							i {
+								&:before {
+									content: "\F141";
+								}
+							}
+						}
+
+						&.open {
+							.arrow {
+								@include transform(rotate(-90deg));
+							}
+						}
+
+						ul {
+							&.dropdown-menu {
+								padding-left: 0px;
+								padding-right: 30px;
+
+								> li {
+									> a {
+										text-align: right;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+
+			.side-nav-logo {
+				border-right: 0px;
+				border-left: 1px solid $border-color;
+
+				.mobile-toggle {
+					float: left;
+					@include transform(rotate(180deg));
+				}
+			}
+		}
+	}
+
+	&.side-nav-folded {
+		.side-nav {
+
+			@include screen-tablet {
+				left: auto;
+				right: 0px;
+			}
+
+			@include screen-laptop-above {
+				&:hover {
+					.side-nav-inner .side-nav-menu > li > a .icon-holder {
+						float: right;
+						margin-left: 14px;
+					}
+				}
+
+
+				.side-nav-inner {
+					
+					.side-nav-menu {
+
+						> li {
+
+							> a {
+								padding-right: 20px;
+
+								.icon-holder {
+									float: none;
+									margin-left: 4px;
+								}
+							}
+						}
+					}	
+				}
+			} 
+		}
+
+		.page-container {
+			@include screen-laptop-above{
+				padding-right: $collapsed-size;
+			}
+		}
+	}
+
+	.header {
+		.header-container {
+			.nav-logo {
+				float: right;
+			}
+
+			.nav-left {
+				float: right;
+				margin-right: 15px;
+
+				> li {
+					float: right;
+				}
+			}
+
+			.nav-right {
+				float: left;
+
+				> li {
+					float: right;
+				}
+
+				.user-profile {
+					border-right: 0px;
+				}
+
+				.dropdown-menu {
+					left: 0px;
+   					right: auto;
+   					@include transform-origin(top left);
+				}
+			}
+		}
+		.search-input {
+			.advanced-search {
+				left: -120px;
+			}
+		}	
+	}
+
+	.page-container {
+		padding-left: 0px;
+
+		@include screen-laptop-above {
+			padding-right: $offscreen-size;
+		}
+	}	
+
+	.quick-view {
+		@include transform(translateX(-300px));
+		left: 0px;
+	}
+
+	&.quick-view-expand {
+
+		.quick-view {
+			@include transform(translateX(0px));	
+		}
+	}
+
+	.pull-right,
+	.float-right {
+		float: left !important;
+	}
+
+	.list-media {
+
+		.media-img {
+			float: right;
+		}
+
+		.info {
+			padding-left: 0px;
+			padding-right: 55px;
+
+			.float-item {
+				right: auto;
+				left: 0px;
+			}
+
+			.sub-title {
+				margin-left: auto;
+			}
+		}	
+	}	
+
+	.card-toolbar {
+		float: left;
+	}
+}

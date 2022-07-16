@@ -1,0 +1,134 @@
+/*
+Theme: Applicator
+Author: Theme_Nate
+*/
+ 
+//==================================
+// 	Fonts
+//==================================
+$font-primary:            Roboto, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif !default;         // Primary font: Roboto
+
+//==================================
+// 	Shaded color
+//==================================
+$default-dark:            #515365;
+$default-white:           #ffffff;
+$default-gray:            #fafafa;
+$default-text-color:      #8a8a8a;
+$body-bg:                 #f7fbff;
+$border-color:            #e9eaec;
+ 
+//==================================
+// 	Context color
+//==================================
+$default-primary:         #6569df;
+$default-success:         #24d5d8;
+$default-info :           #04a1f4;
+$default-warning:         #fecd2f;
+$default-danger:          #fd3259;
+
+//==================================
+// 	Gradiant Base color
+//==================================
+$gradient-primary-base-left:        #b603c1;
+$gradient-success-base-left:        #1dccdf;
+$gradient-info-base-left:           #6a4ee1;
+$gradient-warning-base-left:        #f6d365; 
+$gradient-danger-base-left:         #f3301a;
+
+$gradient-primary-base-right:       #7a38e0;
+$gradient-success-base-right:       #1de4bd;
+$gradient-info-base-right:          #05bdd7;
+$gradient-warning-base-right:       #fda085; 
+$gradient-danger-base-right:        #f37138 ;
+
+//==================================
+// 	Gradiant color
+//==================================
+$gradient-primary:        linear-gradient(120deg, $gradient-primary-base-left 0%, $gradient-primary-base-right 100%);
+$gradient-success:        linear-gradient(120deg, $gradient-success-base-left 0%, $gradient-success-base-right 100%);
+$gradient-info:           linear-gradient(120deg, $gradient-info-base-left 0%, $gradient-info-base-right 100%);
+$gradient-warning:        linear-gradient(120deg, $gradient-warning-base-left  0%,$gradient-warning-base-right 100%); 
+$gradient-danger:         linear-gradient(120deg, $gradient-danger-base-left 0%, $gradient-danger-base-right 100%);
+
+//==================================
+// 	Misc
+//==================================
+$header-height:           65px;
+$offscreen-size:          250px;
+$aside-size:              230px;
+$collapsed-size:          70px;
+$side-nav-dark:           #223143;
+$side-nav-dark-font:      #99abb4;
+$side-nav-dark-border:    rgba(120,130,140,0.3);
+
+//==================================
+// 	Header Themes
+//==================================
+$theme-primary:           $default-primary;
+$theme-info:              $default-info;
+$theme-success:           desaturate($default-success, 5%);
+$theme-danger:            $default-danger;
+$theme-warning:           $default-warning;
+$theme-dark:              lighten($side-nav-dark, 10%);
+
+//==================================
+// 	Social media color
+//==================================
+
+$facebook :               #3B579D;
+$twitter :                #2CAAE1;
+$google-plus :            #dc473c;
+$instagram :              #40719b;
+$pinterest :              #c9181f;
+$skype :                  #00AAF1;
+$linkedin :               #0177b5;
+$youtube :                #DE2825;
+$dropbox :                #007EE6;
+$vimeo :                  #1BB6EC;
+$dribbble :               #ea4c89;
+$behance :                #1869ff;
+$html5 :                  #f16528;
+$tumblr :                 #36465d;
+$wordpress :              #0087be;
+
+//==================================
+// 	Arrays 
+//==================================
+
+//Array for context 
+$contextual-loop: (
+	$default-primary   btn-primary   text-primary   bg-primary   pagination-primary,
+	$default-success   btn-success   text-success   bg-success   pagination-success,
+	$default-info      btn-info      text-info      bg-info   	 pagination-info,
+	$default-warning   btn-warning   text-warning   bg-warning   pagination-warning,
+	$default-danger    btn-danger    text-danger    bg-danger    pagination-danger
+);
+
+//Array for gradient
+$gradient-loop: (
+	$gradient-primary   $default-primary   btn-gradient-primary   icon-gradient-primary   bg-gradient-primary   pagination-gradient-primary,
+	$gradient-success   $default-success   btn-gradient-success   icon-gradient-success   bg-gradient-success   pagination-gradient-success,
+	$gradient-info      $default-info      btn-gradient-info      icon-gradient-info      bg-gradient-info      pagination-gradient-info,
+	$gradient-warning   $default-warning   btn-gradient-warning   icon-gradient-warning   bg-gradient-warning   pagination-gradient-warning,
+	$gradient-danger    $default-danger    btn-gradient-danger    icon-gradient-danger    bg-gradient-danger    pagination-gradient-danger
+);
+
+//Array for social
+$social-loop: (
+	$facebook      btn-facebook      bg-facebook,
+	$twitter       btn-twitter       bg-twitter,
+	$google-plus   btn-google-plus   bg-google-plus,
+	$instagram     btn-instagram     bg-instagram,
+	$dropbox       btn-dropbox       bg-dropbox,
+	$dribbble      btn-dribbble      bg-dribbble,
+	$behance       btn-behance       bg-behance,
+	$html5         btn-html5         bg-html5,
+	$wordpress     btn-wordpress     bg-wordpress,
+	$tumblr        btn-tumblr        bg-tumblr,
+	$skype         btn-skype         bg-skype,
+	$youtube       btn-youtube       bg-youtube,
+	$vimeo         btn-vimeo         bg-vimeo,
+	$linkedin      btn-linkedin      bg-linkedin,
+	$pinterest     btn-pinterest     bg-pinterest
+);

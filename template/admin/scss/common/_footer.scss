@@ -1,0 +1,28 @@
+/*----------------------------------------
+  7. Footer
+----------------------------------------*/
+
+.content-footer {
+		padding: 0px 30px;
+
+  	.footer {
+				padding: 20px 0;
+				font-size: 90%;
+				border-top: 1px solid $border-color;
+				
+
+				.go-right {
+						float: right;
+				}
+				
+				@include screen-mobile {
+						text-align: center;
+
+						.go-right {
+								float: none;
+								margin-top: 15px;
+								display: block; 
+						}
+				} 
+    }
+}

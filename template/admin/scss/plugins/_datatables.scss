@@ -1,0 +1,40 @@
+/*----------------------------------------
+  44. Datatables
+----------------------------------------*/
+
+table {
+	&.dataTable {
+		margin-top: 20px !important;
+		margin-bottom: 20px !important;
+		border-collapse: collapse !important;
+	}
+}
+
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:before,
+table.dataTable thead .sorting_desc_disabled:after {
+	bottom: 50%;
+	@include transform(translateY(50%));
+}
+
+.dataTables_length {
+	select {
+		margin: 0px 5px;
+	}
+}
+
+@include screen-mobile {
+	div.dataTables_wrapper div.dataTables_length,
+	div.dataTables_wrapper div.dataTables_filter,
+	div.dataTables_wrapper div.dataTables_info,
+	div.dataTables_wrapper div.dataTables_paginate  {
+		margin-bottom: 20px;
+	}
+}

@@ -1,0 +1,336 @@
+/*----------------------------------------
+  1. General
+----------------------------------------*/
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
+
+html, html a, body {
+   -webkit-font-smoothing: antialiased;
+}
+
+body {
+   font-family: $font-primary;
+   font-size: 14px;
+   background-color: $body-bg;
+   color: $default-text-color;
+   line-height: 1.5;
+   overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: $default-dark;
+	font-weight: normal;
+	line-height: 1.5;
+	
+	small {
+		font-weight: 300;
+		color: lighten($default-dark,5%);
+	}
+}
+
+h1 {
+	font-size: 28px;
+}
+
+h2 {
+	font-size: 24px;
+}
+
+h3 {
+	font-size: 22px;
+}
+
+h4 {
+	font-size: 19px;
+}
+
+h5 {
+	font-size: 17px;
+}
+
+h6 {
+	font-size: 12px;
+}
+
+p {
+	font-family: $font-primary;
+	color: $default-text-color;
+	line-height: 1.8;
+	margin-bottom: 10px;
+}
+
+.lead {
+	font-size: 18px;
+}
+
+ul {
+	margin-bottom: 0px;
+}
+
+a {
+	color: $default-info;
+	
+	&:hover,
+	&:focus {
+		text-decoration: none;
+		color: darken($default-info,10%);
+	}
+
+	&:focus {
+		outline: none;
+	}
+
+	&.text-gray {
+
+		&:hover,
+		&:focus {
+			color: $default-dark !important;
+		}
+
+		&.active {
+			color: $default-info !important;
+		}
+	}
+
+	&.hover-opacity {
+		&:hover {
+			opacity: 0.8;
+		}
+	}
+}
+
+:focus {
+	outline: none;
+}
+
+hr {
+	border-top: 1px solid $border-color;
+	margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.font-primary {
+	font-family: $font-primary;
+}
+
+.text-link {
+	
+	&:hover,
+	&:focus {
+		text-decoration: underline;
+	}
+}
+
+.text-opacity {
+	opacity: 0.85;
+}
+
+.text-white {
+	color: $default-white !important;
+}
+
+.text-dark {
+	color: $default-dark !important;
+}
+
+.text-gray {
+	color: $default-text-color !important;
+}
+
+.text-secondary {
+	color: #cacaca !important;
+}
+
+// Loop for contextual text-color 
+@each $type in $contextual-loop {
+	.#{nth($type, 3)} {
+		color: #{nth($type, 1)} !important;
+	}
+}	
+
+// Loop for icon gradient color
+@each $type in $gradient-loop {
+	.#{nth($type, 4)} {
+		color:#{nth($type, 2)};
+
+		&:before {
+			background: #{nth($type, 1)};
+			@include gradient-text-masking;
+		}
+	}
+}	
+
+.icon-gradient-primary {
+	color:$default-primary;
+
+	&:before {
+		background: $gradient-primary;
+		@include gradient-text-masking;
+	}
+}
+
+.icon-gradient-success {
+	color:$default-success;
+
+	&:before {
+		background: $gradient-success;
+		@include gradient-text-masking;
+	}
+}
+
+.icon-gradient-warning {
+	color:$default-warning;
+
+	&:before {
+		background: $gradient-warning;
+		@include gradient-text-masking;
+	}
+}
+
+.icon-gradient-danger {
+	color:$default-danger;
+
+	&:before {
+		background: $gradient-danger;
+		@include gradient-text-masking;
+	}
+}
+
+.icon-gradient-info {
+	color:$default-info;
+
+	&:before {
+		background: $gradient-info;
+		@include gradient-text-masking;
+	}
+}
+
+.bg-white {
+	background-color: $default-white !important;
+}
+
+.bg-dark {
+	background-color: $default-dark !important;
+}
+
+.bg-gray {
+	background-color: $default-gray !important;
+}
+
+// Loop for contextual background color 
+@each $type in $contextual-loop {
+	.#{nth($type, 4)} {
+		background-color: #{nth($type, 1)} !important;
+	}
+}	
+
+// Loop for gradient background color 
+@each $type in $gradient-loop {
+	.#{nth($type, 5)} {
+		background: #{nth($type, 1)} !important;
+	}
+}	
+
+// Loop for social background color 
+@each $type in $social-loop {
+	.#{nth($type, 3)} {
+		background-color: #{nth($type, 1)} !important;
+	}
+}	
+
+.img-fit-cover {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.bg {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+.container-fluid {
+
+	&.container-fixed-lg {
+		max-width: 1700px;
+	}
+
+	&.container-fixed-md {
+		max-width: 1400px;
+	}
+
+	&.container-fixed-sm {
+		max-width: 1280px;
+	}
+}
+
+button,
+input,
+textarea {
+	outline: none;
+}
+
+label {
+	margin-bottom: 0px;
+}	
+
+blockquote {
+    border-left: 0px;
+	padding-left: 30px;
+	position: relative;
+}
+
+.blockquote-footer {
+	color: $default-dark;
+}
+
+dt {
+	color: $default-dark;
+	font-weight: 500;
+}
+
+dd {
+	margin-bottom: 10px;
+}
+	
+.fade {
+	&.in {
+		opacity: 1;
+	}
+}	
+
+.collapse {
+	&.in {
+		display: block;
+	}
+}
+
+iframe {
+	border: 0;
+
+	@include screen-mobile {
+		min-height: 175px !important;
+		height: auto;
+	}
+}
+
+@include print {
+	body {
+		font-size: 10px;
+	}	
+
+	.mrg-top-30,
+	.mrg-top-20 {
+		margin-top: 15px !important;
+	}
+
+	.print-invisible {
+		display: none;
+	}
+}

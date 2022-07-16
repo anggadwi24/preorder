@@ -1,0 +1,130 @@
+/*---------------------------------------------------------------------------
+  Template: Applicator - Admin Dashboard Template
+  Author: Theme_Nate
+----------------------------------------------------------------------------*/
+
+@import 'mixins'; //                         Mixins
+@import 'variables'; //                      Variables
+
+/*---------------------------------------------------------------------------
+  1. General
+  2. Utilities
+  3. Side Nav
+  4. Aside
+  5. Quick View
+  6. Header
+  7. Footer
+  8. Page Container
+  9. Widgets
+  10. RTL
+  11. themes
+  12. Alert
+  13. Buttons
+  14. Modal
+  15. List
+  16. Badge
+  17. Card
+  18. Page Title
+  19. Alert
+  21. Breadcrumb
+  22. Dropdown
+  23. Tabs
+  24. Accordion
+  25. Noticfication
+  26. Progress bar
+  27. Popovers
+  28. Tooltips
+  29. Pagination
+  30. Tables
+  31. Maps
+  32. Input
+  33. Controls
+  34. Validation
+  35. Wizard
+  36. Email
+  37. Chat
+  38. Contact
+  39. Nouislider
+  40. Selectize
+  41. Noty
+  42. Summernote
+  43. Datepicker
+  44. Datatables
+  45. Chartist
+  46. Sparkline
+  47. Full Calendar
+  48. Slick
+  49. Sweet Alert
+----------------------------------------------------------------------------*/
+
+/*---------------------------------
+-------------- common -------------
+---------------------------------*/
+@import 'common/general'; //                 general
+@import 'common/utilities'; //               utilities
+@import 'common/side-nav'; //                side-nav
+@import 'common/aside'; //                   aside
+@import 'common/quick-view'; //              quick-view
+@import 'common/header'; //                  header
+@import 'common/footer'; //                  footer
+@import 'common/page-container'; //          page-container
+@import 'common/widgets'; //                 widgets
+@import 'common/rtl'; //                     rtl
+@import 'common/themes'; //                  themes
+@import 'common/demo'; //                    demo
+
+
+/*---------------------------------
+------------ elements -------------
+---------------------------------*/
+@import 'elements/alert'; //                 alert
+@import 'elements/buttons'; //               buttons
+@import 'elements/modal'; //                 modal
+@import 'elements/list'; //                  list
+@import 'elements/badge'; //         		     badge
+@import 'elements/card'; //                  card
+@import 'elements/page-title'; //            page title
+@import 'elements/breadcrumb'; //            breadcrumb
+@import 'elements/dropdown'; //              dropdown
+@import 'elements/tabs'; //                  tabs
+@import 'elements/accordion'; //             accordion
+@import 'elements/noticfication'; //         noticfication
+@import 'elements/progress-bar'; //          progress bar
+@import 'elements/popovers'; //              popovers
+@import 'elements/tooltips'; //              tooltips
+@import 'elements/pagination'; //            pagination
+@import 'elements/tables'; //   	           tables
+@import 'elements/maps'; //   	   	         maps
+
+
+/*---------------------------------
+------------- forms ---------------
+---------------------------------*/ 
+@import 'forms/input'; //   	   	           input
+@import 'forms/controls'; //   	   	         controls
+@import 'forms/validation'; //   	   	       validation
+@import 'forms/wizard'; //   	   	           wizard
+
+
+/*---------------------------------
+-------------- apps ---------------
+---------------------------------*/ 
+@import 'apps/email'; //   	   	             email
+@import 'apps/chat'; //   	   	             chat
+@import 'apps/contact'; //   	   	           contact
+
+
+/*---------------------------------
+------------ plugins -------------
+---------------------------------*/
+@import 'plugins/nouislider'; //             nouislider
+@import 'plugins/selectize'; //              selectize
+@import 'plugins/noty'; //                   noty
+@import 'plugins/sweet-alert'; //            sweet-alert
+@import 'plugins/selectize'; //              selectize
+@import 'plugins/summernote'; //             summernote
+@import 'plugins/datepicker'; //             datepicker
+@import 'plugins/datatables'; //             datatables
+@import 'plugins/chartist'; //               chartist
+@import 'plugins/sparkline'; //              sparkline
+@import 'plugins/full-calendar'; //   	   	 full-calendar

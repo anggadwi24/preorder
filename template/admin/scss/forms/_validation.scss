@@ -1,0 +1,16 @@
+/*----------------------------------------
+  34. Validation
+----------------------------------------*/
+
+label {
+    
+    &.error {
+        color: $default-danger;
+        font-size: 13px;
+        margin-top: 7.5px;
+    }
+
+    &.error-msg {
+        display: none;
+    }
+}

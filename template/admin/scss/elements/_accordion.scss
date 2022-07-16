@@ -1,0 +1,65 @@
+/*----------------------------------------
+  24. Accordion
+----------------------------------------*/
+
+.accordion {
+
+	>.card {
+		margin-bottom: 15px;
+
+		> .card-header {
+			padding: 0px;
+
+			>.card-title {
+
+				> a{
+					padding: 15px 25px;
+					display: block;
+					color: $default-dark;
+					
+					&:not(.collapsed) {
+						&:after {
+							@include transform(rotate(90deg));
+						}
+					}
+
+					&:after {
+						content:"\F142";
+						font-family: "Material Design Icons";
+						float: left;
+						margin-right: 10px;
+						@include transition(all 0.3s ease-in-out); 
+					}
+				}
+			}
+		}
+
+		.card-body {
+			padding-top: 5px;
+		}
+	}
+
+	&.nested {
+		>.card {
+			margin-bottom: 0px;
+			border-bottom: 0px;
+
+			&:last-child {
+				border-bottom: 1px solid $border-color;
+			}
+		}	
+	}
+
+	&.borderless {
+		>.card {
+			margin-bottom: 0px;
+			border-top: 0px;
+			border-left: 0px;
+			border-right: 0px;
+
+			&:last-child {
+				border-bottom: 0px;
+			}
+		}	
+	}
+}
