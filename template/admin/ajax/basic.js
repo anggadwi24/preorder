@@ -1,18 +1,20 @@
 $(document).on('click','.delete',function(){
+  var href = $(this).attr('data-href');
     swal({
-        title: 'Apakah anda yakin?',
-        text: 'data akan terhapus',
-        icon: 'warning',
-        buttons: true,
-        dangerMode: true,
-        buttons: [ 'Batal','Hapus']
-      }) .then((willDelete) => {
-        if (willDelete) {
-            window.location = $(this).attr('data-href');
-        } else {
-          swal.close();
-        }
-    });
+        title: 'Peringatan',
+        text: 'apakah anda yakin menghapus data ini?',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#334a65',
+        confirmButtonText: 'Yakin',
+        cancelButtonText: 'Tidak',
+      },function(isConfirm){
+				if (isConfirm) {
+					window.location = href;
+				} else {
+					
+				}
+			});
 })
 
 

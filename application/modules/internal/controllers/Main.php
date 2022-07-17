@@ -18,7 +18,10 @@ class Main extends MX_Controller {
 	public function index()
 	{
 		$data['title'] = 'Dashboard - '.title();
-	
+		$data['page'] = 'Dashboard';
+		$data['right'] ='';
+		$data['breadcrumb'] = '';
+		
 		$this->template->load('template','dashboard/dashboard',$data);
 		
 	}

@@ -437,4 +437,9 @@
         }  
         return $difftext;  
        }
+       function rupiah($total){
+        $num =  number_format($total,0);
+        $num  = str_replace(',','.',$num);
+        return $num;
+    }
 }?>

@@ -17,18 +17,41 @@ class Profile extends MX_Controller {
 
 	public function index()
 	{
-		$data['title'] = 'Profile - '.title();
-        $data['breadcumb'] = ' <span class="breadcrumb-item active">Profile</span>';
+        $id = decode($this->session->userdata['isLog']['users_id']);
+        $row = $this->model_app->view_where('users',array('users_id'=>$id))->row_array();
+        $data['page'] = 'Profil';
+		$data['title'] = 'Profil - '.title();
+		$data['right'] =' ';
+		$data['row'] = $row;
+		$data['breadcrumb'] = ' <span class="breadcrumb-item active">Profil</span>';
+
         $this->template->load('template','profile',$data);
 	
 	}
-    function add(){
-        $name = $this->input->post('name');
-        $notelp = $this->input->post('notelp');
-        $username = $this->input->post('username');
-        $password = sha1($this->input->post('password'));
-        $data = array('users_nama'=>$name,'users_username'=>$username,'users_no_telp'=>$notelp,'users_password'=>$password,'users_status'=>'y');
-        $this->model_app->insert('users',$data);
+    function do(){
+        $id = decode($this->session->userdata['isLog']['users_id']);
+        $row = $this->model_app->view_where('users',array('users_id'=>$id));
+        if($row->num_rows() > 0){
+            
+            $name = $this->input->post('name');
+            $notelp = $this->input->post('notelp');
+            $username = $this->input->post('username');
+            $password = $this->input->post('password');
+            if(trim($password)){
+                $data = array('users_nama'=>$name,'users_username'=>$username,'users_no_telp'=>$notelp,'users_password'=>sha1($password));
+
+            }else{
+                 $data = array('users_nama'=>$name,'users_username'=>$username,'users_no_telp'=>$notelp);
+
+            }
+            $this->model_app->update('users',$data,array('users_id'=>$id));
+            $this->session->set_flashdata('success','Profil berhasil diperbarui');
+            redirect('internal/profile');
+        }else{
+            $this->session->set_flashdata('error','Sesi telah berakhir');
+            redirect('internal/logout');
+        }
+       
     }
 
 

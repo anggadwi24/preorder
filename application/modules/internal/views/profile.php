@@ -1,15 +1,4 @@
-<div class="page-header">
-    <h2 class="header-title">Profile</h2>
-    <div class="header-sub-title">
-        <nav class="breadcrumb breadcrumb-dash">
-            <a href="<?= base_url('internal/main') ?>" class="breadcrumb-item"><i class="ti-home p-r-5"></i>Dashboard</a>
-            <?= $breadcumb ?>
-        
-           
 
-        </nav>
-    </div>
-</div> 
 
 <div class="row">
     
@@ -20,20 +9,20 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="p-h-10">
-                            <h5>Data Profile</h5>
+                            <h5>Form Profil</h5>
                             <hr>    
-                            <form class="m-t-15" action="<?= base_url('internal/profile/add') ?>" method="post" enctype="multipart/form-data">
+                            <form class="m-t-15" action="<?= base_url('internal/profile/do') ?>" method="post" enctype="multipart/form-data">
                                 <div class="form-row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">Nama</label>
-                                            <input type="text" class="form-control" name="name" required>
+                                            <input type="text" class="form-control" name="name" value="<?= $row['users_nama']?>">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">No Telp</label>
-                                            <input type="text" class="form-control" name="notelp" required>
+                                            <input type="text" class="form-control" name="notelp" value="<?= $row['users_no_telp']?>">
                                         </div>
                                     </div>
                                 </div>
@@ -41,7 +30,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">Username</label>
-                                            <input type="text" class="form-control" name="username" required>
+                                            <input type="text" class="form-control" name="username" value="<?= $row['users_username']?>">
                                         </div>
                                     </div>
                                     <div class="col-md-6">

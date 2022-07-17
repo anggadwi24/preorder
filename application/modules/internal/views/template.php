@@ -14,7 +14,8 @@
     <link rel="stylesheet" href="<?= base_url() ?>template/admin/vendor/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="<?= base_url() ?>template/admin/vendor/PACE/themes/blue/pace-theme-minimal.css" />
     <link rel="stylesheet" href="<?= base_url() ?>template/admin/vendor/perfect-scrollbar/css/perfect-scrollbar.min.css" />
-
+    <link href="<?= base_url() ?>template/admin/vendor/timepicker/tempusdominus-bootstrap-4.css" rel="stylesheet" />
+    <link href="<?= base_url() ?>template/admin/vendor/timepicker/bootstrap-material-datetimepicker.css" rel="stylesheet">
     <!-- page css -->
     <link href="<?= base_url() ?>template/admin/vendor/selectize/dist/css/selectize.default.css" rel="stylesheet">
     <link href="<?= base_url() ?>template/admin/vendor/summernote/dist/summernote-bs4.css"  rel="stylesheet">
@@ -28,6 +29,7 @@
     <link href="<?= base_url() ?>template/admin/css/animate.min.css" rel="stylesheet">
     <link href="<?= base_url() ?>template/admin/css/app.css" rel="stylesheet">
     <link href="<?= base_url() ?>template/admin/vendor/sweetalert/lib/sweet-alert.css" rel="stylesheet">
+
     <style type="text/css">
         .kanan{
             float: right;
@@ -98,7 +100,7 @@
                                 <li>
                                     <a href="<?= base_url('internal/profile') ?>">
                                         <i class="ti-user p-r-10"></i>
-                                        <span>Profile</span>
+                                        <span>Profil</span>
                                     </a>
                                 </li>
                                 <li>
@@ -125,7 +127,7 @@
                             <span>Navigation</span>
                         </li>
                         <li class="nav-item dropdown">
-                            <a href="<?= base_url('admin/main_admin') ?>">
+                            <a href="<?= base_url('internal/') ?>">
                                 <span class="icon-holder">
                                     <i class="mdi mdi-gauge"></i>
                                 </span>
@@ -147,7 +149,7 @@
                         <li class="nav-item dropdown">
                             <a href="<?= base_url('internal/member') ?>">
                                 <span class="icon-holder">
-                                    <i class="mdi mdi-vector-arrange-above"></i>
+                                    <i class="mdi mdi-account"></i>
                                 </span>
                                 <span class="title">Member</span>
                             </a>
@@ -187,7 +189,20 @@
                 <!-- Content Wrapper START -->
                 <div class="main-content">
                     <div class="container-fluid">
+                    <div class="page-header">
 
+                    <h2 class="header-title"><?= $page  ?></h2>
+                    <div class="header-sub-title">
+                        <nav class="breadcrumb breadcrumb-dash">
+                            <a href="<?= base_url('internal/') ?>" class="breadcrumb-item"><i class="ti-home p-r-5"></i>Dashboard</a>
+                            <?= $breadcrumb ?>
+                            
+                        </nav>
+                    </div>
+                    <?= $right ?>
+                   
+
+                    </div> 
 
                 <?= $contents ?>
 
@@ -219,6 +234,8 @@
     <!-- build:js <?= base_url() ?>template/admin/js/vendor.js -->
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="<?= base_url() ?>template/admin/vendor/selectize/dist/js/standalone/selectize.min.js"></script>
+    
     <script src="<?= base_url() ?>template/admin/vendor/sweetalert/lib/sweet-alert.js"></script>
 
     <?php 
@@ -245,7 +262,7 @@
     swal(
     {
         title: 'Berhasil',
-        html: '<?= $this->session->flashdata('success') ?>',
+        text: '<?= $this->session->flashdata('success') ?>',
         type: 'success',
         
     }
@@ -277,6 +294,12 @@
     <script src="<?= base_url() ?>template/admin/vendor/datatables/media/js/jquery.dataTables.js"></script>
     <script src="<?= base_url() ?>template/admin/vendor/datatables/media/js/dataTables.bootstrap4.min.js"></script>
     <script src="<?= base_url() ?>template/admin/js/tables/data-table.js"></script>
+    <script src="<?= base_url() ?>template/admin/vendor/timepicker/moment.js"></script>
+    <script src="<?= base_url() ?>template/admin/vendor/timepicker/tempusdominus-bootstrap-4.js"></script>
+    <script src="<?= base_url() ?>template/admin/vendor/timepicker/bootstrap-material-datetimepicker.js"></script>
+    <?php if(isset($js)){
+        echo "<script  type='module' src='".$js."'></script>";
+    } ?>
    
 
     
