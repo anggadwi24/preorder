@@ -84,7 +84,8 @@ class Produk extends MX_Controller
 
 							
 							$dataR = array(
-								'pb_id' => $produk_id,
+								
+								'pb_produk_id'=>$produk_id,
 								'pb_batch' => $this->input->post('batch'),
 								'pb_tanggal_mulai' => date('Y-m-d H:i:s',strtotime($start)),
 								'pb_tanggal_selesai' => date('Y-m-d H:i:s',strtotime($end)),
