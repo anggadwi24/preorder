@@ -9,7 +9,7 @@
                         <th>No</th>
                         <th>Produk</th>
                         <th>Harga Jual</th>
-                        <th>Status</th>
+                     
                         <th></th>
                     </tr>
                 </thead>
@@ -32,7 +32,7 @@
                                     </div>
                                 </td>
                                 <td><?=  rupiah($row['produk_harga_jual'])?></td>
-                                <td><?php if($row['produk_status'] == 'preorder'){ echo "Pre Order";}else{ echo "Close Order";}?></td>
+                           
                                 <td class="font-size-18">
                                     
                                     <div class="card-toolbar">

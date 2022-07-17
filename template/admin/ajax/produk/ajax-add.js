@@ -6,8 +6,7 @@ import successBack from "../success-back.js";
 import successRedirect from "../success-redirect.js";
 
 import error from "../error.js";
-var date = new Date();
-var today = new Date(date.getFullYear(), date.getMonth(), date.getDate()+1);
+
 $('.dateTime').bootstrapMaterialDatePicker({ 
     format : 'YYYY-MM-DD HH:mm' 
 
@@ -72,4 +71,35 @@ $(document).on('submit','#formAct',function(e){
     })
             
    
+})
+
+$(document).on('change keyup','#count',function(){
+    var total = $(this).val();
+    var html = $('.formBatch').html();
+    var count = $('.formBatch').length;
+    if(total > 0){
+        if(total > count){
+            for(var i = count; i < total; i++){
+                var newHtml = '<div class="col-12 my-1 formBatch child">'+html+'</div>';
+                $('#place').append(newHtml);
+                $('.dateTime').bootstrapMaterialDatePicker({ 
+                    format : 'YYYY-MM-DD HH:mm' 
+                
+                });  
+            }
+        }else{
+            var sel = count-total;
+            for(var i = 0; i < sel; i++){
+                $('.formBatch').last().remove();
+            }
+        }
+    }else{
+        error('Peringatan','Jumlah batch tidak boleh kosong');
+    }
+    
+
+
+});
+$(document).on('click','button[type="reset"]',function(){
+    $('.child').remove();
 })
