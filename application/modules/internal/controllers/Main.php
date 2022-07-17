@@ -7,22 +7,23 @@ class Main extends MX_Controller {
 	public function __construct()
 	{
         parent::__construct();
-    	
+		$this->load->model('model_app','',TRUE);
+    	if($this->session->userdata('isLog')){
+			
+		}else{
+			redirect('internal/auth');
+		}
 	}
 
 	public function index()
 	{
-		$data['title'] = 'Internal';
+		$data['title'] = 'Dashboard - '.title();
+	
 		$this->template->load('template','dashboard/dashboard',$data);
-		// $this->template->load('template_admin','admin/dashboard');
+		
 	}
 
-	public function profile()
-	{
-		$data['title'] = 'Internal';
-		$this->template->load('template','profile',$data);
-		// $this->template->load('template_admin','admin/dashboard');
-	}
+
 
 	
 }

@@ -5,6 +5,9 @@
     function replace($arr,$elem){
         return str_replace($arr,'',$elem);
     }
+    function title(){
+        return "I Love KPOP ID";
+    }
     function seo($s) {
         $c = array (' ');
         $d = array ('-','/','\\',',','.','#',':',';','\'','"','[',']','{','}',')','(','|','`','~','!','@','%','$','^','&','*','=','?','+','–');
@@ -13,7 +16,7 @@
         return $s;
     }
     function keys(){
-        return "KELURAHANRENON2022SKRIPSIBARU109231283##";
+        return "ILOVEKPOPID109231283##";
     }
     function __session(){
         $ci = & get_instance();
@@ -312,13 +315,13 @@
      }
     
      function encode($post){
-         $key =  "KELURAHANRENON2022SKRIPSIBARU109231283##";
+         $key =  "ILOVEKPOPID109231283##";
          $ci = & get_instance();
          return $ci->encrypt->encode($post,$key);
 
      }
      function decode($post){
-        $key =  "KELURAHANRENON2022SKRIPSIBARU109231283##";
+        $key =  "ILOVEKPOPID109231283##";
         $ci = & get_instance();
         return $ci->encrypt->decode($post,$key);
         

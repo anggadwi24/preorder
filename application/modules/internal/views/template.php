@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>SI REKAP PREORDER</title>
+    <title><?= $title  ?></title>
 
     <!-- Favicon -->
     <link rel="apple-touch-icon" href="<?= base_url() ?>template/admin/images/logo/apple-touch-icon.png">
@@ -27,7 +27,7 @@
     <link href="<?= base_url() ?>template/admin/css/materialdesignicons.min.css" rel="stylesheet">
     <link href="<?= base_url() ?>template/admin/css/animate.min.css" rel="stylesheet">
     <link href="<?= base_url() ?>template/admin/css/app.css" rel="stylesheet">
-
+    <link href="<?= base_url() ?>template/admin/vendor/sweetalert/lib/sweet-alert.css" rel="stylesheet">
     <style type="text/css">
         .kanan{
             float: right;
@@ -96,13 +96,13 @@
                                 </li>
                                 <li role="separator" class="divider"></li>
                                 <li>
-                                    <a href="">
+                                    <a href="<?= base_url('internal/profile') ?>">
                                         <i class="ti-user p-r-10"></i>
                                         <span>Profile</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="">
+                                    <a href="<?= base_url('internal/logout') ?>">
                                         <i class="ti-power-off p-r-10"></i>
                                         <span>Logout</span>
                                     </a>
@@ -145,11 +145,11 @@
                             </a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a href="<?= base_url('internal/anggota/') ?>">
+                            <a href="<?= base_url('internal/member') ?>">
                                 <span class="icon-holder">
                                     <i class="mdi mdi-vector-arrange-above"></i>
                                 </span>
-                                <span class="title">Anggota</span>
+                                <span class="title">Member</span>
                             </a>
                         </li>
                         
@@ -219,7 +219,39 @@
     <!-- build:js <?= base_url() ?>template/admin/js/vendor.js -->
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    
+    <script src="<?= base_url() ?>template/admin/vendor/sweetalert/lib/sweet-alert.js"></script>
+
+    <?php 
+    if($this->session->flashdata('error')){
+
+    ?>
+    <script>
+
+    swal(
+    {
+        title: 'Peringatan',
+        text: '<?= $this->session->flashdata('error') ?>',
+        type: 'warning',
+        
+    }
+    )
+    </script>   
+    <?php
+    }
+    ?>
+    <?php
+    if($this->session->flashdata('success')){ ?>
+    <script>
+    swal(
+    {
+        title: 'Berhasil',
+        html: '<?= $this->session->flashdata('success') ?>',
+        type: 'success',
+        
+    }
+    )
+    </script>
+    <?php }?>
     <!-- core dependcies js -->
     <script src="<?= base_url() ?>template/admin/vendor/jquery/dist/jquery.min.js"></script>
     <script src="<?= base_url() ?>template/admin/vendor/popper.js/dist/umd/popper.min.js"></script>
@@ -245,8 +277,8 @@
     <script src="<?= base_url() ?>template/admin/vendor/datatables/media/js/jquery.dataTables.js"></script>
     <script src="<?= base_url() ?>template/admin/vendor/datatables/media/js/dataTables.bootstrap4.min.js"></script>
     <script src="<?= base_url() ?>template/admin/js/tables/data-table.js"></script>
-    
-    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+   
+
     
 </body>
 

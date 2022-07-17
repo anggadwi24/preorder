@@ -92,7 +92,7 @@ $autoload['drivers'] = array();
 */
 $autoload['helper'] = array(
     'url', 'file', 'cookie', 'email', 'text', 'form', 'string', 'directory',
-    'language', 'smiley', 'xml', 'html', 'date', 'functions','download'
+    'language', 'smiley', 'xml', 'html', 'date', 'functions','download','base_helper'
 );
 /*
 | -------------------------------------------------------------------

@@ -1,12 +1,12 @@
 <div class="page-header">
 
 
-    <h2 class="header-title">Anggota</h2>
+    <h2 class="header-title">Member</h2>
     <div class="header-sub-title">
         <nav class="breadcrumb breadcrumb-dash">
             <a href="<?= base_url('admin/main_admin') ?>" class="breadcrumb-item"><i class="ti-home p-r-5"></i>Dashboard</a>
-            <a class="breadcrumb-item" href="#">Master Data</a>
-            <span class="breadcrumb-item active">Data Anggota</span>
+          
+            <?= $breadcumb ?>
         </nav>
     </div>
 
