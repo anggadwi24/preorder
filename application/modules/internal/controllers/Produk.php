@@ -48,10 +48,13 @@ class Produk extends MX_Controller
 					$config['max_size']             = 5000;
 						
 							
-					$this->load->library('upload', $config);
+					$this->load->library('upload', $config,'thumbnail');
+			
+					$this->thumbnail->initialize($config);
+								
 
-				if ($this->upload->do_upload('file')){
-					$upload_data = $this->upload->data();
+				if ($this->thumbnail->do_upload('file')){
+					$upload_data = $this->thumbnail->data();
 					$thumbnail = $upload_data['file_name'];
 					$sts = $this->input->post('status');
 					$data = array(

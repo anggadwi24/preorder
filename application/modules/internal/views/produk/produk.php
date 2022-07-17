@@ -22,7 +22,7 @@
                                     <div class="list-media">
                                         <div class="list-item">
                                             <div class="media-img">
-                                                <img class="rounded" src="<?= base_url('upload/produk/'.$row['produk_img']) ?>" alt="">
+                                                <img class="rounded" src="<?= base_url('upload/produk/'.$row['produk_image']) ?>" alt="">
                                             </div>
                                             <div class="info">
                                             <span class="title"><?= $row['produk_nama'] ?></span>
