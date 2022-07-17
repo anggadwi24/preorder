@@ -10,10 +10,10 @@
                         <div class="p-h-10">
                             <h5>Foto Profil</h5>
                             <hr>    
-                            <form class="m-t-15" action="<?= base_url('') ?>" method="post" enctype="multipart/form-data">
-                                <img class="img-fluid justify-content-center" src="">
+                            <form class="m-t-15" action="<?= base_url('internal/profile/image') ?>" method="post" enctype="multipart/form-data">
+                            <img class="img-fluid d-block text-center mx-auto" id="image" srcset="" src="<?= base_url('upload/user/').$row['users_foto']?>">
                                 <div class="form-group">
-                                    <input type="file" class="form-control" name="">
+                                    <input type="file" class="form-control" name="file" accept="image/*" >
                                 </div>
                                 <div class="form-group">
                                     <div class="text-sm-right">

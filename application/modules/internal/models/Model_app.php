@@ -143,10 +143,10 @@ class Model_app extends CI_model{
         $this->db->order_by($order,$ordering);
         return $this->db->get()->result_array();
     }
-    function seo_berita($title)
+    function seo_produk($title)
 	{
 			
-			$query = " SELECT * FROM berita WHERE  berita_seo =  '$title' ";
+			$query = " SELECT * FROM produk WHERE  produk_seo =  '$title' ";
 			$query = $this->db->query($query);
             if($query->num_rows() > 0){
                 return $title.'_'.rand(4,100);
@@ -155,10 +155,10 @@ class Model_app extends CI_model{
             }
 		
 	}
-     function seo_berita_update($title,$id)
+     function seo_produk_update($title,$id)
 	{
 			
-			$query = " SELECT * FROM berita WHERE  berita_seo =  '$title' AND berita_id != '$id' ";
+			$query = " SELECT * FROM produk WHERE  produk_seo =  '$title' AND produk_id != '$id' ";
 			$query = $this->db->query($query);
             if($query->num_rows() > 0){
                 return $title.'_'.rand(4,100);

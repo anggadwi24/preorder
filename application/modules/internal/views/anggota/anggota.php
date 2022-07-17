@@ -30,41 +30,13 @@
                                 <td><?php if($row['member_status'] == 'y'){echo "Aktif";}else{echo "Tidak Aktif";}?></td>
                                 <td class="font-size-18">
 
-                                    <a href="" class=" m-r-15 btn btn-success">
+                                    <a href="<?= base_url('internal/member/status?id='.encode($row['member_id'])) ?>" class=" m-r-15 btn btn-success">
                                         <span><?php if($row['member_status'] == 'y'){echo ' <i class="mdi mdi-account-off m-r-5"></i> Suspen';}else{echo '  <i class="mdi mdi-account m-r-5"></i> Aktif';}?></span>
                                     </a>
                                     <a href="<?= base_url('internal/member/edit?id='.$row['member_id']) ?>" class="text-info m-r-15"><i class="ti-pencil"></i></a>
                                     <a href="<?= base_url('internal/member/delete?id=').encode($row['member_id']) ?>" class="text-danger"><i class="ti-trash"></i></a>
                                     
-                                    <div class="card-toolbar">
-                                        <ul>
-                                            <li class="dropdown dropdown-animated scale-left">
-                                                <a class="text-gray" data-toggle="dropdown" href="javascript:void(0)">
-                                                    <i class="mdi mdi-dots-vertical font-size-20"></i>
-                                                </a>
-                                                <ul class="dropdown-menu">
-                                                    <li class="d-block">
-                                                        <a class="dropdown-item" href="<?= base_url('internal/member/status?id='.encode($row['member_id'])) ?>">
-                                                            
-                                                            <span><?php if($row['member_status'] == 'y'){echo ' <i class="mdi mdi-account-off m-r-5"></i> Suspen';}else{echo '  <i class="mdi mdi-account m-r-5"></i> Aktif';}?></span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="d-block">
-                                                        <a class="dropdown-item" href="<?= base_url('internal/member/edit?id='.$row['member_id']) ?>">
-                                                            <i class="mdi mdi-pencil m-r-5"></i>
-                                                            <span>Edit</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="d-block">
-                                                        <a class="dropdown-item delete" href="#" data-href="<?= base_url('internal/member/delete?id=').encode($row['member_id']) ?>">
-                                                            <i class="mdi mdi-delete m-r-5"></i>
-                                                            <span>Delete</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>    
-                                    </div>
+                                    
                                 </td>
                             </tr>
                         <?php $no++; }?>

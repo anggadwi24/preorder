@@ -55,7 +55,7 @@
                                                         </a>
                                                     </li>
                                                     <li class="d-block">
-                                                        <a class="dropdown-item delete" data-href="<?= base_url('internal/produk/delete?id='.$row['produk_id']) ?>">
+                                                        <a class="dropdown-item delete" data-href="<?= base_url('internal/produk/delete?id='.encode($row['produk_id'])) ?>">
                                                             <i class="mdi mdi-delete m-r-5"></i>
                                                             <span>Delete</span>
                                                         </a>

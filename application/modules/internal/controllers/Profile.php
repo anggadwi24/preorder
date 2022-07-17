@@ -14,7 +14,48 @@ class Profile extends MX_Controller {
 			redirect('internal/auth');
 		}
 	}
+    function image(){
+		if($this->input->method() == 'post'){
+			$id = decode($this->session->userdata['isLog']['users_id']);
+			$cek = $this->model_app->view_where('users',array('users_id'=>$id));
+			$image = null;
+			if($cek->num_rows() > 0){
+				$row = $cek->row_array();
+				$config['upload_path']          = './upload/user/';
+				$config['encrypt_name'] = TRUE;
+				$config['allowed_types']        = 'gif|jpg|png|jpeg';
+				$config['max_size']             = 5000;
+					
+						
+				$this->load->library('upload', $config);
+		
+				
+							
 
+				if ($this->upload->do_upload('file')){
+					$upload_data = $this->upload->data();
+					$foto = $upload_data['file_name'];
+					$path = './upload/user/'.$row['users_foto'] ;
+           
+          
+                    unlink($path);
+					$image = base_url('upload/user/').$foto;
+					$this->model_app->update('users',array('users_foto'=>$foto),array('users_id'=>$id));
+                    $this->session->set_flashdata('success','Foto berhasil diubah');
+					redirect('internal/profile');
+				}else{
+                    $this->session->set_flashdata('error','Foto gagal diubah');
+					redirect('internal/profile');
+				}
+			}else{
+                $this->session->set_flashdata('error','Sesi telah berakhir');
+                redirect('internal/logout');
+			}
+		
+		}else{
+			redirect('internal/profile');
+		}
+	}
 	public function index()
 	{
         $id = decode($this->session->userdata['isLog']['users_id']);

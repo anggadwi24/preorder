@@ -18,7 +18,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="control-label">Mini Desc</label>
+                                            <label class="control-label">Mini Deskripsi</label>
                                             <input type="text" class="form-control" name="mini">
                                         </div>
                                     </div>

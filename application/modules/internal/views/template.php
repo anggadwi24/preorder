@@ -77,21 +77,25 @@
                             </div>
                         </li>
                     </ul>
+                    <?php
+                          $id = decode($this->session->userdata['isLog']['users_id']);
+                          $row = $this->model_app->view_where('users',array('users_id'=>$id))->row_array();
+                    ?>
                     <ul class="nav-right">
                         <li class="user-profile dropdown dropdown-animated scale-left">
                             <a href="" class="dropdown-toggle" data-toggle="dropdown">
-                                <img class="profile-img img-fluid" src="<?= base_url() ?>template/admin/images/avatars/thumb-13.jpg" alt="">
+                                <img class="profile-img img-fluid" src="<?= base_url() ?>upload/user/<?= $row['users_foto']?>" alt="">
                             </a>
                             <ul class="dropdown-menu dropdown-md p-v-0">
                                 <li>
                                     <ul class="list-media">
                                         <li class="list-item p-15">
                                             <div class="media-img">
-                                                <img src="<?= base_url() ?>template/admin/images/avatars/thumb-13.jpg" alt="">
+                                                <img src="<?= base_url() ?>upload/user/<?= $row['users_foto']?>" alt="">
                                             </div>
                                             <div class="info">
-                                                <span class="title text-semibold">Nama</span>
-                                                <span class="sub-title">Level</span>
+                                                <span class="title text-semibold"><?= $row['users_nama'] ?></span>
+                                                <span class="sub-title"><?= $row['users_username'] ?></span>
                                             </div>
                                         </li>
                                     </ul>
