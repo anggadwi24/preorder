@@ -154,6 +154,14 @@
                                 <span class="title">Member</span>
                             </a>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a href="<?= base_url('internal/user') ?>">
+                                <span class="icon-holder">
+                                    <i class="mdi mdi-account"></i>
+                                </span>
+                                <span class="title">User</span>
+                            </a>
+                        </li>
                         
                         <li class="side-nav-header">
                             <span>Transaksi</span>
