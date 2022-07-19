@@ -35,10 +35,12 @@ class Produk extends MX_Controller
 		if($cek->num_rows() > 0){
 			$data['page'] = 'Produk';
 			$data['row'] = $cek->row_array();
+			$data['record'] = $this->model_app->view_where_ordering('produk_batch',array('pb_produk_id'=>$id),'pb_tanggal_selesai','ASC');
 			$data['title'] = 'Batch Produk - '.title();
 			$data['right'] =' <a href="" data-toggle="modal" data-target="#modaltambahbatch" class="btn btn-info kanan"><i class="ti-plus"> </i> Tambah batch</a>';
 			$data['breadcrumb'] = ' <a href="'.base_url('internal/produk').'" class="breadcrumb-item">Produk</a>';
 			$data['breadcrumb'] .= ' <span class="breadcrumb-item active">Batch</span>';
+			$data['js'] = base_url('template/admin/ajax/produk/ajax-batch.js');
 			
 			
 			$this->template->load('template','produk/produk_batch',$data);
@@ -117,6 +119,153 @@ class Produk extends MX_Controller
 			$this->session->set_flashdata("error","Produk tidak ditemukan");
 			redirect('internal/produk');
 		}
+		
+	}
+	public function detailBatch()
+	{
+		
+		$id = $this->input->get('id');
+		$cek = $this->model_app->join_where('produk_batch','produk','pb_produk_id','produk_id',array('pb_id'=>$id));
+		if($cek->num_rows() > 0){
+			$row = $cek->row_array();
+			$data['page'] = 'Produk';
+			$data['row'] = $cek->row_array();
+			$data['title'] = 'Detail Batch - '.title();
+			$data['right'] =' ';
+			$data['breadcrumb'] = ' <a href="'.base_url('internal/produk').'" class="breadcrumb-item">Produk</a>';
+			$data['breadcrumb'] .= '<a href="'.base_url('internal/batch?id='.$row['produk_id']).'" class="breadcrumb-item">Batch</a>';
+			$data['breadcrumb'] .= ' <span class="breadcrumb-item active">Detail</span>';
+
+			
+			$data['js'] = base_url('template/admin/ajax/produk/ajax-detail.js');
+			
+			$this->template->load('template','produk/produk_batch_detail',$data);
+		}else{
+			$this->session->set_flashdata('error','Batch tidak ditemukan');
+			redirect('internal/produk');
+		}
+		
+	
+		
+	}
+	function dataBatch(){
+		if($this->input->method() == 'post'){
+			$id = decode($this->input->post('id'));
+			$arr = null;
+			$cek = $this->model_app->view_where('produk_batch',array('pb_id'=>$id));
+			if($cek->num_rows() > 0){
+				$row = $cek->row_array();
+				$arr = array('batch'=>$row['pb_batch'],'status'=>$row['pb_status'],'selesai'=>date('Y-m-d H:i',strtotime($row['pb_tanggal_selesai'])),'id'=>encode($row['pb_id']),'mulai'=>date('Y-m-d H:i',strtotime($row['pb_tanggal_mulai'])));
+				$status = true;
+				$msg= null;
+			}else{
+				$status = false;
+				$msg = 'Batch tidak ditemukan';
+			}
+			echo json_encode(array('status'=>$status,'msg'=>$msg,'arr'=>$arr));
+		}else{
+			redirect($_SERVER['HTTP_REFERER']);
+		}
+	}
+	function deleteBatch(){
+	
+			$id = decode($this->input->get('id'));
+			$cek = $this->model_app->view_where('produk_batch',array('pb_id'=>$id));
+			if($cek->num_rows() > 0){
+				$row = $cek->row_array();
+				$buyer = $this->db->query("SELECT coalesce(SUM(td_qty),0) as total FROM transaksi a JOIN transaksi_detail b ON a.transaksi_id = b.td_transaksi_id WHERE td_produk_id = ".$row['pb_produk_id']."  AND td_pb_id = ".$row['pb_id']." ")->row_array();
+				if($buyer['total'] > 0){
+					$this->session->set_flashdata("error","Batch ini sudah digunakan, tidak dapat dihapus");
+					redirect($_SERVER['HTTP_REFERER']);
+				}else{
+					$this->model_app->delete('produk_batch',array('pb_id'=>$id));
+					$this->session->set_flashdata('success','Batch berhasil dihapus');
+					redirect($_SERVER['HTTP_REFERER']);
+				}
+			}else{
+				$this->session->set_flashdata('error','Produk tidak ditemukan');
+				redirect('internal/produk');
+			}
+
+	}
+	public function storeBatch()
+	{
+		if($this->input->method() == 'post'){
+			$id = decode($this->input->post('id'));
+			$cek = $this->model_app->view_where('produk',array('produk_id'=>$id));
+			if($cek->num_rows() > 0){
+				$this->form_validation->set_rules('batch','Batch','min_length[1]|max_length[255]|required');
+				$this->form_validation->set_rules('status','Status','required');
+				$this->form_validation->set_rules('start','Target Mulai','required');
+				$this->form_validation->set_rules('end',' Target Selesai','required');
+				
+				if($this->form_validation->run() == FALSE){
+					
+					$replace = array('<p>','</p>');
+					$this->session->set_flashdata('error',replace($replace,validation_errors()));
+					redirect($_SERVER['HTTP_REFERER']);
+				}else{
+					$data = array(
+						'pb_produk_id'=>$id,
+						'pb_batch'=>$this->input->post('batch'),
+						'pb_status'=>$this->input->post('status'),
+						'pb_tanggal_mulai'=>date('Y-m-d H:i:s',strtotime($this->input->post('start'))),
+						'pb_tanggal_selesai'=>date('Y-m-d H:i:s',strtotime($this->input->post('end'))),
+		
+						
+					);
+					$this->model_app->insert('produk_batch',$data);
+					$this->session->set_flashdata('success','Batch berhasil ditambahkan');
+					redirect($_SERVER['HTTP_REFERER']);
+				}
+			}else{
+				$this->session->set_flashdata('error','Produk tidak ditemukan');
+				redirect('internal/produk');
+			}
+		}else{
+			redirect($_SERVER['HTTP_REFERER']);
+		}
+	
+		
+	}
+	public function updateBatch()
+	{
+		if($this->input->method() == 'post'){
+			$id = decode($this->input->post('id'));
+			$cek = $this->model_app->view_where('produk_batch',array('pb_id'=>$id));
+			if($cek->num_rows() > 0){
+				$this->form_validation->set_rules('batch','Batch','min_length[1]|max_length[255]|required');
+				$this->form_validation->set_rules('status','Status','required');
+				$this->form_validation->set_rules('start','Target Mulai','required');
+				$this->form_validation->set_rules('end',' Target Selesai','required');
+				
+				if($this->form_validation->run() == FALSE){
+					
+					$replace = array('<p>','</p>');
+					$this->session->set_flashdata('error',replace($replace,validation_errors()));
+					redirect($_SERVER['HTTP_REFERER']);
+				}else{
+					$data = array(
+					
+						'pb_batch'=>$this->input->post('batch'),
+						'pb_status'=>$this->input->post('status'),
+						'pb_tanggal_mulai'=>date('Y-m-d H:i:s',strtotime($this->input->post('start'))),
+						'pb_tanggal_selesai'=>date('Y-m-d H:i:s',strtotime($this->input->post('end'))),
+		
+						
+					);
+					$this->model_app->update('produk_batch',$data,array('pb_id'=>$id));
+					$this->session->set_flashdata('success','Batch berhasil diubah');
+					redirect($_SERVER['HTTP_REFERER']);
+				}
+			}else{
+				$this->session->set_flashdata('error','Produk tidak ditemukan');
+				redirect('internal/produk');
+			}
+		}else{
+			redirect($_SERVER['HTTP_REFERER']);
+		}
+	
 		
 	}
 	public function update()

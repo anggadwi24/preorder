@@ -18,6 +18,5 @@ $(document).on('click','.delete',function(){
 })
 
 
-
   
     

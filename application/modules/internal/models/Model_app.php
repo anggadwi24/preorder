@@ -111,6 +111,7 @@ class Model_app extends CI_model{
        
         return $this->db->get();
     }
+   
     public function join_where_order($table1,$table2,$field,$where,$order,$ordering){
         $this->db->select('*');
         $this->db->from($table1);
