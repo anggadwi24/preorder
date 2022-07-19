@@ -133,7 +133,7 @@ class Produk extends MX_Controller
 			$data['title'] = 'Detail Batch - '.title();
 			$data['right'] =' ';
 			$data['breadcrumb'] = ' <a href="'.base_url('internal/produk').'" class="breadcrumb-item">Produk</a>';
-			$data['breadcrumb'] .= '<a href="'.base_url('internal/batch?id='.$row['produk_id']).'" class="breadcrumb-item">Batch</a>';
+			$data['breadcrumb'] .= '<a href="'.base_url('internal/produk/batch?id='.$row['produk_id']).'" class="breadcrumb-item">Batch</a>';
 			$data['breadcrumb'] .= ' <span class="breadcrumb-item active">Detail</span>';
 
 			
@@ -155,7 +155,7 @@ class Produk extends MX_Controller
 			$cek = $this->model_app->view_where('produk_batch',array('pb_id'=>$id));
 			if($cek->num_rows() > 0){
 				$row = $cek->row_array();
-				$arr = array('batch'=>$row['pb_batch'],'status'=>$row['pb_status'],'selesai'=>date('Y-m-d H:i',strtotime($row['pb_tanggal_selesai'])),'id'=>encode($row['pb_id']),'mulai'=>date('Y-m-d H:i',strtotime($row['pb_tanggal_mulai'])));
+				$arr = array('batch'=>$row['pb_batch'],'selesai'=>date('Y-m-d H:i',strtotime($row['pb_tanggal_selesai'])),'id'=>encode($row['pb_id']),'mulai'=>date('Y-m-d H:i',strtotime($row['pb_tanggal_mulai'])));
 				$status = true;
 				$msg= null;
 			}else{
@@ -195,7 +195,7 @@ class Produk extends MX_Controller
 			$cek = $this->model_app->view_where('produk',array('produk_id'=>$id));
 			if($cek->num_rows() > 0){
 				$this->form_validation->set_rules('batch','Batch','min_length[1]|max_length[255]|required');
-				$this->form_validation->set_rules('status','Status','required');
+			
 				$this->form_validation->set_rules('start','Target Mulai','required');
 				$this->form_validation->set_rules('end',' Target Selesai','required');
 				
@@ -208,7 +208,7 @@ class Produk extends MX_Controller
 					$data = array(
 						'pb_produk_id'=>$id,
 						'pb_batch'=>$this->input->post('batch'),
-						'pb_status'=>$this->input->post('status'),
+						'pb_status'=>'open',
 						'pb_tanggal_mulai'=>date('Y-m-d H:i:s',strtotime($this->input->post('start'))),
 						'pb_tanggal_selesai'=>date('Y-m-d H:i:s',strtotime($this->input->post('end'))),
 		
@@ -235,7 +235,7 @@ class Produk extends MX_Controller
 			$cek = $this->model_app->view_where('produk_batch',array('pb_id'=>$id));
 			if($cek->num_rows() > 0){
 				$this->form_validation->set_rules('batch','Batch','min_length[1]|max_length[255]|required');
-				$this->form_validation->set_rules('status','Status','required');
+
 				$this->form_validation->set_rules('start','Target Mulai','required');
 				$this->form_validation->set_rules('end',' Target Selesai','required');
 				
@@ -248,7 +248,7 @@ class Produk extends MX_Controller
 					$data = array(
 					
 						'pb_batch'=>$this->input->post('batch'),
-						'pb_status'=>$this->input->post('status'),
+					
 						'pb_tanggal_mulai'=>date('Y-m-d H:i:s',strtotime($this->input->post('start'))),
 						'pb_tanggal_selesai'=>date('Y-m-d H:i:s',strtotime($this->input->post('end'))),
 		

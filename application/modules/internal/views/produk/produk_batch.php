@@ -86,22 +86,13 @@
                     <div class="col-12 my-1 formBatch parent" >
                         <div class="form-row  mt-3">
                     
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="control-label">Batch</label>
                                     <input type="text" class="form-control" name="batch" placeholder="Masukan Batch" required>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">Status</label>
-                                    <select name="status" class="form-control" required>
-                                        <option value="open">Open Order</option>
-                                        <option value="close">Close Order</option>
-
-                                    </select>
-                                </div>
-                            </div>
+                            
                         
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -145,22 +136,13 @@
                     <div class="col-12 my-1 formBatch parent" >
                         <div class="form-row  mt-3">
                     
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="control-label">Batch</label>
                                     <input type="text" class="form-control" name="batch" id="batch" placeholder="Masukan Batch" required>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">Status</label>
-                                    <select name="status" id="status" class="form-control" required>
-                                        <option value="open">Open Order</option>
-                                        <option value="close">Close Order</option>
-
-                                    </select>
-                                </div>
-                            </div>
+                          
                         
                             <div class="col-md-6">
                                 <div class="form-group">

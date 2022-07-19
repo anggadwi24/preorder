@@ -28,7 +28,7 @@ $(document).on('click','.edit',function(){
                 $('#batch').val(resp.arr.batch);
                 $('#start').val(resp.arr.mulai);
                 $('#end').val(resp.arr.selesai);
-                $('#status').val(resp.arr.status);
+              
                 $('#modalEdit').modal('show');
             }else{
                 error('Peringatan',resp.msg);
