@@ -33,39 +33,12 @@
                                 </td>
                                 <td><?=  rupiah($row['produk_harga_jual'])?></td>
                            
-                                <td class="font-size-18">
+                                <td class="font-size-18 text-center">
                                     
-                                    <div class="card-toolbar">
-                                        <ul>
-                                            <li class="dropdown dropdown-animated scale-left">
-                                                <a class="text-gray" data-toggle="dropdown" href="javascript:void(0)">
-                                                    <i class="mdi mdi-dots-vertical font-size-20"></i>
-                                                </a>
-                                                <ul class="dropdown-menu">
-                                                    <li class="d-block">
-                                                        <a class="dropdown-item" href="<?= base_url('internal/produk/detail?id='.$row['produk_id']) ?>" >
-                                                            <i class="mdi mdi-eye m-r-5"></i>
-                                                            <span>Detail</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="d-block">
-                                                        <a class="dropdown-item" href="<?= base_url('internal/produk/edit?id='.$row['produk_id']) ?>">
-                                                            <i class="mdi mdi-pencil m-r-5"></i>
-                                                            <span>Edit</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="d-block">
-                                                        <a class="dropdown-item delete" data-href="<?= base_url('internal/produk/delete?id='.encode($row['produk_id'])) ?>">
-                                                            <i class="mdi mdi-delete m-r-5"></i>
-                                                            <span>Delete</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>    
-                                    </div>
-
-                                    
+                                    <a href="<?= base_url('internal/produk/detail?id='.$row['produk_id']) ?>" class="text-primary m-r-15"><i class="ti-eye"></i></a>
+                                    <a href="<?= base_url('internal/produk/edit?id='.$row['produk_id']) ?>" class="text-info m-r-15"><i class="ti-pencil"></i></a>
+                                    <a href="<?= base_url('internal/produk/delete?id='.encode($row['produk_id'])) ?>" class="text-danger m-r-15"><i class="ti-trash"></i></a>
+                                    <a href="<?= base_url('internal/produk/batch?id='.$row['produk_id']) ?>" class="text-success"><i class="ti-reload m-r-15"></i></a>
 
                                 </td>
                             </tr>

@@ -28,6 +28,27 @@ class Produk extends MX_Controller
 
 
 	}
+	public function batch()
+	{
+		$id = $this->input->get('id');
+		$cek = $this->model_app->view_where('produk',array('produk_id'=>$id));
+		if($cek->num_rows() > 0){
+			$data['page'] = 'Produk';
+			$data['row'] = $cek->row_array();
+			$data['title'] = 'Batch Produk - '.title();
+			$data['right'] =' <a href="" data-toggle="modal" data-target="#modaltambahbatch" class="btn btn-info kanan"><i class="ti-plus"> </i> Tambah batch</a>';
+			$data['breadcrumb'] = ' <a href="'.base_url('internal/produk').'" class="breadcrumb-item">Produk</a>';
+			$data['breadcrumb'] .= ' <span class="breadcrumb-item active">Batch</span>';
+			
+			
+			$this->template->load('template','produk/produk_batch',$data);
+		}else{
+			$this->session->set_flashdata("error","Produk tidak ditemukan");
+			redirect('internal/produk');
+		}
+
+
+	}
 	public function add()
 	{
 		$data['page'] = 'Produk';
@@ -71,6 +92,27 @@ class Produk extends MX_Controller
 			$data['js'] = base_url('template/admin/ajax/produk/ajax-edit.js');
 			
 			$this->template->load('template','produk/produk_edit',$data);
+		}else{
+			$this->session->set_flashdata("error","Produk tidak ditemukan");
+			redirect('internal/produk');
+		}
+		
+	}
+	public function detail()
+	{
+		$id = $this->input->get('id');
+		$cek = $this->model_app->view_where('produk',array('produk_id'=>$id));
+		if($cek->num_rows() > 0){
+			$data['page'] = 'Produk';
+			$data['row'] = $cek->row_array();
+			$data['title'] = 'Detail Produk - '.title();
+			$data['right'] =' ';
+			$data['breadcrumb'] = ' <a href="'.base_url('internal/produk').'" class="breadcrumb-item">Produk</a>';
+			$data['breadcrumb'] .= ' <span class="breadcrumb-item active">Detail</span>';
+			
+			$data['js'] = base_url('template/admin/ajax/produk/ajax-edit.js');
+			
+			$this->template->load('template','produk/produk_detail',$data);
 		}else{
 			$this->session->set_flashdata("error","Produk tidak ditemukan");
 			redirect('internal/produk');
@@ -185,7 +227,7 @@ class Produk extends MX_Controller
 								<div class="card-toolbar">
 									<ul>
 										<li>
-											<a class="text-white delete" data-id="'.encode($rows['pg_id']).'" >
+											<a class="text-white btn btn-danger delete" data-id="'.encode($rows['pg_id']).'" >
 												<i class="mdi mdi-delete font-size-20"></i>
 											</a>
 										</li>

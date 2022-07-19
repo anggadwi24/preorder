@@ -117,7 +117,7 @@
                                             <div class="card-toolbar">
                                                 <ul>
                                                     <li>
-                                                        <a class="text-white" href="" >
+                                                        <a class="text-white btn btn-danger" href="" >
                                                             <i class="mdi mdi-delete font-size-20"></i>
                                                         </a>
                                                     </li>
