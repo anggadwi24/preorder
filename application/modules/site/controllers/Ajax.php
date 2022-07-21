@@ -76,10 +76,11 @@ class Ajax extends MX_Controller
         if($this->input->method() == 'post'){
             $output = null;
             $count = $this->cart->total_items() ;
+            $subtotal = 0;
             if($this->cart->total_items() <= 0){
                 $output = '  <li><span>Keranjang masih kosong</span></li>';
             }else{
-                $subtotal = 0;
+              
                 $record = $this->cart->contents();
                 foreach($record as $row ){
                     $subtotal = $subtotal + $row['subtotal'];
