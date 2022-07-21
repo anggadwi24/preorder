@@ -3,7 +3,7 @@
     <head>
     <!-- Basic Page Needs -->
     <meta charset="utf-8">
-    <title>Xpoge</title>
+    <title><?= $title  ?></title>
 
     <!-- Mobile Specific Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -12,11 +12,14 @@
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="<?= base_url() ?>template/public/css/xpoge.css">
     <link rel="stylesheet" type="text/css" href="<?= base_url() ?>template/public/css/responsive.css">
+    
+    <link href="<?= base_url() ?>template/admin/vendor/sweetalert/lib/sweet-alert.css" rel="stylesheet">
+
 
     </head>
     <body>
         <!-- Start preloader -->
-        <!-- <div id="preloader"></div> -->
+        <div id="preloader"></div>
         <!-- End preloader -->
 
         
@@ -205,11 +208,46 @@
             <!-- Footer section end -->
         </div>
         <script src="<?= base_url() ?>template/public/js/jquery-3.4.1.min.js"></script>
+        <script src="<?= base_url() ?>template/admin/vendor/sweetalert/lib/sweet-alert.js"></script>
+        <?php 
+        if($this->session->flashdata('error')){
+
+        ?>
+        <script>
+
+        swal(
+        {
+            title: 'Peringatan',
+            text: '<?= $this->session->flashdata('error') ?>',
+            type: 'warning',
+            
+        }
+        )
+        </script>   
+        <?php
+        }
+        ?>
+        <?php
+        if($this->session->flashdata('success')){ ?>
+        <script>
+        swal(
+        {
+            title: 'Berhasil',
+            text: '<?= $this->session->flashdata('success') ?>',
+            type: 'success',
+            
+        }
+        )
+        </script>
+        <?php }?>
         <script src="<?= base_url() ?>template/public/js/bootstrap.min.js"></script>
         <script src="<?= base_url() ?>template/public/js/owl.carousel.min.js"></script>
         <script src="<?= base_url() ?>template/public/js/jquery.magnific-popup.min.js"></script>
         <script src="<?= base_url() ?>template/public/js/custom.js"></script>
-        
+        <?php if(isset($js)){
+            echo "<script  type='module' src='".$js."'></script>";
+        } ?>
+   
     </body>
 
 </html>

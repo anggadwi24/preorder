@@ -12,7 +12,8 @@ class Product extends MX_Controller
 
 	public function index()
 	{
-		$this->template->load('template','product');
+		$data['title'] = 'Produk - '.title();
+		$this->template->load('template','product',$data);
 	}
 
 	public function detail()

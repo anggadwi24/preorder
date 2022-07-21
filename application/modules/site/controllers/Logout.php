@@ -17,9 +17,9 @@ class Logout extends MX_Controller {
         public function index()
         {
             if(!isset($_SESSION)) {	session_start(); } 
-            $this->session->unset_userdata('isLog');
+            $this->session->unset_userdata('isMember');
             session_destroy();
-            redirect('internal/auth', 'refresh');
+            redirect('auth', 'refresh');
         }
     
 }

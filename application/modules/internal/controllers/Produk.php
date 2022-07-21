@@ -124,35 +124,57 @@ class Produk extends MX_Controller
 	public function detailBatch()
 	{
 		
-		// $id = $this->input->get('id');
-		// $cek = $this->model_app->join_where('produk_batch','produk','pb_produk_id','produk_id',array('pb_id'=>$id));
-		// if($cek->num_rows() > 0){
-		// 	$row = $cek->row_array();
-		// 	$data['page'] = 'Produk';
-		// 	$data['row'] = $cek->row_array();
-		// 	$data['title'] = 'Detail Batch - '.title();
-		// 	$data['right'] =' ';
-		// 	$data['breadcrumb'] = ' <a href="'.base_url('internal/produk').'" class="breadcrumb-item">Produk</a>';
-		// 	$data['breadcrumb'] .= '<a href="'.base_url('internal/produk/batch?id='.$row['produk_id']).'" class="breadcrumb-item">Batch</a>';
-		// 	$data['breadcrumb'] .= ' <span class="breadcrumb-item active">Detail</span>';
+		$id = $this->input->get('id');
+		$cek = $this->model_app->join_where('produk_batch','produk','pb_produk_id','produk_id',array('pb_id'=>$id));
+		if($cek->num_rows() > 0){
+			$row = $cek->row_array();
+			$data['page'] = 'Produk';
+			$data['row'] = $cek->row_array();
+			$data['title'] = 'Detail Batch - '.title();
+			if($row['pb_status'] == 'open'){
+				$data['right'] =' <a href="'.base_url('internal/produk/statusBatch?id='.encode($row['pb_id'])).'" class="btn btn-info kanan"><i class="ti-times"> </i> Tutup Batch</a>';
+			}else{
+				$data['right'] =' <a href="'.base_url('internal/produk/statusBatch?id='.encode($row['pb_id'])).'" class="btn btn-info kanan"><i class="ti-times"> </i> Buka Batch</a>';
+			}
+		
+			$data['breadcrumb'] = ' <a href="'.base_url('internal/produk').'" class="breadcrumb-item">Produk</a>';
+			$data['breadcrumb'] .= '<a href="'.base_url('internal/produk/batch?id='.$row['produk_id']).'" class="breadcrumb-item">Batch</a>';
+			$data['breadcrumb'] .= ' <span class="breadcrumb-item active">Detail</span>';
 
 			
-		// 	$data['js'] = base_url('template/admin/ajax/produk/ajax-detail.js');
+			$data['js'] = base_url('template/admin/ajax/basic.js');
 			
-		// 	$this->template->load('template','produk/produk_batch_detail',$data);
-		// }else{
-		// 	$this->session->set_flashdata('error','Batch tidak ditemukan');
-		// 	redirect('internal/produk');
-		// }
+			$this->template->load('template','produk/produk_batch_detail',$data);
+		}else{
+			$this->session->set_flashdata('error','Batch tidak ditemukan');
+			redirect('internal/produk');
+		}
 		
-		$data['page'] = 'Produk';
-		$data['title'] = 'Produk - '.title();
-		$data['right'] ='';
-		$data['breadcrumb'] = ' <span class="breadcrumb-item active">Produk</span>';
+	
+	
 		
-		$data['js'] = base_url('template/admin/ajax/basic.js');
-		$data['record'] = $this->model_app->view_order('produk','produk_id','DESC');	
-		$this->template->load('template','produk/produk_batch_detail',$data);
+	}
+	public function statusBatch()
+	{
+		
+		$id = decode($this->input->get('id'));
+		$cek = $this->model_app->join_where('produk_batch','produk','pb_produk_id','produk_id',array('pb_id'=>$id));
+		if($cek->num_rows() > 0){
+			$row = $cek->row_array();
+			if($row['pb_status'] == 'open'){
+				$data = array('pb_status'=>'close');
+			}else{
+				$data = array('pb_status'=>'open');
+			}
+			$this->model_app->update('produk_batch',$data,array('pb_id'=>$id));
+			$this->session->set_flashdata('success','Status batch berhasil diubah');
+			redirect($_SERVER['HTTP_REFERER']);
+		}else{
+			$this->session->set_flashdata('error','Batch tidak ditemukan');
+			redirect($_SERVER['HTTP_REFERER']);
+		}
+		
+	
 	
 		
 	}

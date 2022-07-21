@@ -17,7 +17,7 @@
 					<div class="container">
 						<div class="row justify-content-center">
 				            <div class="col-xl-6 col-lg-8 col-md-8 ">
-				              <form class="main-form full">
+				              <form class="main-form full" id="formAct">
 				                <div class="row">
 				                  <div class="col-12 mb-20">
 				                    <div class="heading-part align-center">
@@ -27,13 +27,13 @@
 				                  <div class="col-12">
 				                    <div class="form-group">
 				                      <label for="login-email">Email</label>
-				                      <input id="login-email" type="email" required="" placeholder="Alamat Email">
+				                      <input id="login-email" type="email"  placeholder="Alamat Email" name="email">
 				                    </div>
 				                  </div>
 				                  <div class="col-12">
 				                    <div class="form-group">
 				                      <label for="login-pass">Password</label>
-				                      <input id="login-pass" type="password" required="" placeholder="Password">
+				                      <input id="login-pass" type="password"  placeholder="Password" name="password">
 				                    </div>
 				                  </div>
 				                  <div class="col-12">
@@ -49,7 +49,7 @@
 				                  </div>
 				                  <div class="col-12">
 				                    <div class="new-account align-center mt-20"> <span>Belum punya akun?</span> 
-				                    	<a class="link" title="Create New Account" href="<?= base_url('auth/register') ?>">Daftar akun baru</a> </div>
+				                    	<a class="link" title="Create New Account" href="<?= base_url('register') ?>">Daftar akun baru</a> </div>
 				                  </div>
 				                </div>
 				              </form>

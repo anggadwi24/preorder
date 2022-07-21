@@ -108,6 +108,14 @@
           return $result;
         }
       }
+      function rp($total){
+        $num =  number_format($total,0);
+        return 'Rp. '.str_replace(',','.',$num);
+    }
+    function idr($total){
+        $num =  number_format($total,0);
+        return 'IDR. '.str_replace(',','.',$num);
+    }
       function pushTelegram($message)
 	    {
         $token = "5203341549:AAFclRxgx7Qc55TVwDO7mT_CesP8U5uakO8";

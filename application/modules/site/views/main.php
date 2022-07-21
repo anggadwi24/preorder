@@ -27,7 +27,7 @@
             <div class="services-box mb-30">
                 <div class="services-box-inner">
                     <div class="services-icon services1">
-                        <img src="<?= base_url() ?>assets/images/ser-icon1.svg" alt="xpoge">
+                        <img src="<?= base_url() ?>template/public/images/ser-icon1.svg" alt="xpoge">
                     </div>
                     <div class="services-detail">
                         <h3 class="ser-title">Gratis Pengiriman</h3>
@@ -40,7 +40,7 @@
             <div class="services-box mb-30">
                 <div class="services-box-inner">
                     <div class="services-icon services2">
-                        <img src="<?= base_url() ?>assets/images/ser-icon2.svg" alt="xpoge">
+                        <img src="<?= base_url() ?>template/public/images/ser-icon2.svg" alt="xpoge">
                     </div>
                     <div class="services-detail">
                         <h3 class="ser-title">Hadiah Spesial</h3>
@@ -53,7 +53,7 @@
             <div class="services-box mb-30">
                 <div class="services-box-inner">
                     <div class="services-icon services3">
-                        <img src="<?= base_url() ?>assets/images/ser-icon3.svg" alt="xpoge">
+                        <img src="<?= base_url() ?>template/public/images/ser-icon3.svg" alt="xpoge">
                     </div>
                     <div class="services-detail">
                         <h3 class="ser-title">Uang Kembali</h3>
@@ -79,130 +79,60 @@
   </div>
 </div>
 <div class="row">
+<?php 
+    if($preorder->num_rows() > 0){
+        foreach($preorder->result_array() as $pre){
+            $btch = $this->model_app->view_where("produk_batch",array('pb_produk_id'=>$pre['produk_id']));
+            if(file_exists('upload/produk/'.$pre['produk_image'])){
+                $gambar = base_url().'upload/produk/'.$pre['produk_image'];
+            }else{
+                $gambar = base_url().'upload/produk/404.jpg';
+            }
 
-<div class="col-lg-3 col-md-4 col-6">
-    <div class="product-item">
-        <div class="product-image">
-            <div class="new-label"><span>New</span></div>
-            <a href="product-page.html">
-                <img src="<?= base_url() ?>assets/images/6.jpg" alt="Xpoge">
-            </a>
-        </div>
-        <div class="product-details-outer">
-            <div class="product-details">
-                <div class="product-title">
-                    <a href="product-page.html">Polyester Printed T-Shirts</a>
+            if(countTime($pre['pb_created_on']) < 7){
+                $new = ' <div class="new-label"><span>New</span></div>';
+            }else{
+                $new = '';
+            }
+            if($btch->num_rows() > 1){
+                $judul = $pre['produk_nama'].' ('.$pre['pb_batch'].')';
+            }else{
+                $judul = $pre['produk_nama'];
+            }
+            echo ' <div class="col-lg-3 col-md-4 col-6">
+            <div class="product-item">
+                <div class="product-image">
+                   '.$new.'
+                    <a href="'.base_url('produk/'.$pre['produk_seo'].'&batch='.$pre['pb_batch'].'').'">
+                        <img src="'.$gambar.'" alt="Xpoge">
+                    </a>
                 </div>
-                <div class="price-box">
-                    <span class="price">$88.54</span>
-                    <del class="price old-price">$100.00</del>
+                <div class="product-details-outer">
+                    <div class="product-details">
+                        <div class="product-title">
+                            <a href="'.base_url('produk/'.$pre['produk_seo'].'&batch='.$pre['pb_batch'].'').'">'.$judul.'</a>
+                        </div>
+                        <div class="price-box">
+                            <span class="price">'.idr($pre['produk_harga_jual']).'</span>
+                           
+                        </div>
+                    </div>
+                    <div class="product-details-btn">
+                        <ul>
+                            <li class="icon cart-icon">
+                                <a class="card" data-produk="'.encode($pre['produk_id']).'">
+                                    <span></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <div class="product-details-btn">
-                <ul>
-                    <li class="icon cart-icon">
-                        <a href="cart.html">
-                            <span></span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
+        </div>';
+        }
+    }
+?>
 
-<div class="col-lg-3 col-md-4 col-6">
-    <div class="product-item">
-        <div class="product-image">
-            <div class="new-label"><span>New</span></div>
-            <a href="product-page.html">
-                <img src="<?= base_url() ?>assets/images/6.jpg" alt="Xpoge">
-            </a>
-        </div>
-        <div class="product-details-outer">
-            <div class="product-details">
-                <div class="product-title">
-                    <a href="product-page.html">Polyester Printed T-Shirts</a>
-                </div>
-                <div class="price-box">
-                    <span class="price">$88.54</span>
-                    <del class="price old-price">$100.00</del>
-                </div>
-            </div>
-            <div class="product-details-btn">
-                <ul>
-                    <li class="icon cart-icon">
-                        <a href="cart.html">
-                            <span></span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="col-lg-3 col-md-4 col-6">
-    <div class="product-item">
-        <div class="product-image">
-            <div class="new-label"><span>New</span></div>
-            <a href="product-page.html">
-                <img src="<?= base_url() ?>assets/images/6.jpg" alt="Xpoge">
-            </a>
-        </div>
-        <div class="product-details-outer">
-            <div class="product-details">
-                <div class="product-title">
-                    <a href="product-page.html">Polyester Printed T-Shirts</a>
-                </div>
-                <div class="price-box">
-                    <span class="price">$88.54</span>
-                    <del class="price old-price">$100.00</del>
-                </div>
-            </div>
-            <div class="product-details-btn">
-                <ul>
-                    <li class="icon cart-icon">
-                        <a href="cart.html">
-                            <span></span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="col-lg-3 col-md-4 col-6">
-    <div class="product-item">
-        <div class="product-image">
-            <div class="new-label"><span>New</span></div>
-            <a href="product-page.html">
-                <img src="<?= base_url() ?>assets/images/6.jpg" alt="Xpoge">
-            </a>
-        </div>
-        <div class="product-details-outer">
-            <div class="product-details">
-                <div class="product-title">
-                    <a href="product-page.html">Polyester Printed T-Shirts</a>
-                </div>
-                <div class="price-box">
-                    <span class="price">$88.54</span>
-                    <del class="price old-price">$100.00</del>
-                </div>
-            </div>
-            <div class="product-details-btn">
-                <ul>
-                    <li class="icon cart-icon">
-                        <a href="cart.html">
-                            <span></span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
 
 </div>
     </div>
@@ -241,118 +171,58 @@
   </div>
 </div>
 <div class="row">
+<?php 
+    if($closeorder->num_rows() > 0){
+        foreach($closeorder->result_array() as $cor){
+            $btch = $this->model_app->view_where("produk_batch",array('pb_produk_id'=>$cor['produk_id']));
+            if(file_exists('upload/produk/'.$cor['produk_image'])){
+                $gambar = base_url().'upload/produk/'.$cor['produk_image'];
+            }else{
+                $gambar = base_url().'upload/produk/404.jpg';
+            }
 
-<div class="col-lg-3 col-md-4 col-6">
-    <div class="product-item">
-        <div class="product-image">
-            <a href="product-page.html">
-                <img src="<?= base_url() ?>assets/images/6.jpg" alt="Xpoge">
-            </a>
-        </div>
-        <div class="product-details-outer">
-            <div class="product-details">
-                <div class="product-title">
-                    <a href="product-page.html">Polyester Printed T-Shirts</a>
+            if(countTime($cor['pb_created_on']) < 7){
+                $new = ' <div class="new-label"><span>New</span></div>';
+            }else{
+                $new = '';
+            }
+            if($btch->num_rows() > 1){
+                $judul = $cor['produk_nama'].' ('.$cor['pb_batch'].')';
+            }else{
+                $judul = $cor['produk_nama'];
+            }
+            echo ' <div class="col-lg-3 col-md-4 col-6">
+            <div class="product-item">
+                <div class="product-image">
+                   '.$new.'
+                    <a href="'.base_url('produk/'.$cor['produk_seo'].'&batch='.$cor['pb_batch'].'').'">
+                        <img src="'.$gambar.'" alt="Xpoge">
+                    </a>
                 </div>
-                <div class="price-box">
-                    <span class="price">$88.54</span>
-                    <del class="price old-price">$100.00</del>
+                <div class="product-details-outer">
+                    <div class="product-details">
+                        <div class="product-title">
+                            <a href="'.base_url('produk/'.$cor['produk_seo'].'&batch='.$cor['pb_batch'].'').'">'.$judul.'</a>
+                        </div>
+                        <div class="price-box">
+                            <span class="price">'.idr($cor['produk_harga_jual']).'</span>
+                           
+                        </div>
+                    </div>
+                    <div class="product-details-btn">
+                        <ul>
+                            <li class="icon cart-icon">
+                                <p><b>Close Order</b></p>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <div class="product-details-btn">
-                <ul>
-                    <li class="icon cart-icon">
-                        <p><b>Close Order</b></p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
+        </div>';
+        }
+    }
+?>
 
-<div class="col-lg-3 col-md-4 col-6">
-    <div class="product-item">
-        <div class="product-image">
-            <a href="product-page.html">
-                <img src="<?= base_url() ?>assets/images/6.jpg" alt="Xpoge">
-            </a>
-        </div>
-        <div class="product-details-outer">
-            <div class="product-details">
-                <div class="product-title">
-                    <a href="product-page.html">Polyester Printed T-Shirts</a>
-                </div>
-                <div class="price-box">
-                    <span class="price">$88.54</span>
-                    <del class="price old-price">$100.00</del>
-                </div>
-            </div>
-            <div class="product-details-btn">
-                <ul>
-                    <li class="icon cart-icon">
-                        <p><b>Close Order</b></p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="col-lg-3 col-md-4 col-6">
-    <div class="product-item">
-        <div class="product-image">
-            <a href="product-page.html">
-                <img src="<?= base_url() ?>assets/images/6.jpg" alt="Xpoge">
-            </a>
-        </div>
-        <div class="product-details-outer">
-            <div class="product-details">
-                <div class="product-title">
-                    <a href="product-page.html">Polyester Printed T-Shirts</a>
-                </div>
-                <div class="price-box">
-                    <span class="price">$88.54</span>
-                    <del class="price old-price">$100.00</del>
-                </div>
-            </div>
-            <div class="product-details-btn">
-                <ul>
-                    <li class="icon cart-icon">
-                        <p><b>Close Order</b></p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="col-lg-3 col-md-4 col-6">
-    <div class="product-item">
-        <div class="product-image">
-            <a href="product-page.html">
-                <img src="<?= base_url() ?>assets/images/6.jpg" alt="Xpoge">
-            </a>
-        </div>
-        <div class="product-details-outer">
-            <div class="product-details">
-                <div class="product-title">
-                    <a href="product-page.html">Polyester Printed T-Shirts</a>
-                </div>
-                <div class="price-box">
-                    <span class="price">$88.54</span>
-                    <del class="price old-price">$100.00</del>
-                </div>
-            </div>
-            <div class="product-details-btn">
-                <ul>
-                    <li class="icon cart-icon">
-                        <p><b>Close Order</b></p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
 
 </div>
     </div>

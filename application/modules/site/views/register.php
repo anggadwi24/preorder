@@ -17,7 +17,7 @@
 		<div class="container">
 			<div class="row justify-content-center">
 	            <div class="col-12 ">
-	              <form class="main-form full">
+	              <form class="main-form full" id="formAct">
 	                <div class="row">
 	                  <div class="col-12 mb-20">
 	                    <div class="heading-part align-center">
@@ -28,58 +28,65 @@
 	                  	<div class="form-row">
 		                    <div class="form-group col-md-6">
 		                      <label for="f-name">Nama Lengkap</label>
-		                      <input type="text" id="f-name" required="">
+		                      <input type="text" id="f-name" required="" name="nama">
 		                    </div>
 		                    <div class="form-group col-md-6">
 		                      <label for="f-name">No telp</label>
-		                      <input type="text" id="f-name" required="">
+		                      <input type="text" id="f-name" required="" name="no_telp">
 		                    </div>
 	                    </div>
 	                  </div>
 	                  <div class="col-12">
 	                    <div class="form-group">
 	                      <label for="l-name">Alamat</label>
-	                      <textarea></textarea>
+	                      <textarea name="alamat"></textarea>
 	                    </div>
 	                  </div>
 	                  <div class="col-md-4 col-12">
 							<div class="form-group">
 								<label for="zip">Provinsi</label>
-	                        	<select>
-	                        		<option>Bali</option>
+	                        	<select name="provinsi" id="provinsi">
+									<option selected disabled></option>
+	                        		<?php
+										if($provinsi->num_rows() > 0){
+											foreach($provinsi->result_array() as $prv){
+												echo "<option value='".$prv['provinsi_id']."'>".$prv['provinsi_nama']."</option>";
+											}
+										}
+									?>
 	                        	</select>
 	                        </div>
 						</div>
 						<div class="col-md-4 col-12">
 							<div class="form-group">
 								<label for="city">Kabupaten</label>
-	                        	<select>
-	                        		<option>Bali</option>
+	                        	<select id="kabupaten" name="kabupaten">
+	                        		<option disabled selected></option>
 	                        	</select>
 	                        </div>
 						</div>
 						<div class="col-md-4 col-12">
 							<div class="form-group">
 								<label for="city">Kode Pos</label>
-			                        <input type="text">
+			                        <input type="text" name="kode_pos">
 
 	                        </div>
 						</div>
 	                  <div class="col-12">
 	                    <div class="form-group">
 	                      <label for="l-name">Email</label>
-	                      <input type="text" id="l-name" required="">
+	                      <input type="text" id="l-name" required="" name="email">
 	                    </div>
 	                  </div>
 	                  <div class="col-12">
 	                  	<div class="form-row">
 		                    <div class="form-group col-md-6">
 		                      <label for="f-name">Password</label>
-		                      <input type="text" id="f-name" required="">
+		                      <input type="password" id="f-name" required="" name="password">
 		                    </div>
 		                    <div class="form-group col-md-6">
 		                      <label for="f-name">Re-Password</label>
-		                      <input type="text" id="f-name" required="">
+		                      <input type="password" id="f-name" required="" name="repass">
 		                    </div>
 	                    </div>
 	                  </div>
@@ -92,7 +99,7 @@
 	                  <div class="col-12">
 	                  	<hr>
 	                    <div class="new-account align-center mt-20"> <span>Sudah memiliki akun</span> 
-	                    	<a class="link" title="Login Here" href="login.html">Login disini</a> </div>
+	                    	<a class="link" title="Login Here" href="<?= base_url('auth') ?>">Login disini</a> </div>
 	                  </div>
 	                </div>
 	              </form>
