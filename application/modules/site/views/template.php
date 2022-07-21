@@ -67,17 +67,25 @@
                                             <ul class="link-dropdown-list">
                                               <li> <span class="dropdown-title">Akun Saya</span>
                                                 <ul>
-                                                  <li><a href="<?= base_url('auth') ?>">Login</a></li>
-                                                  <li><a href="<?= base_url('register') ?>">Daftar Akun Baru</a></li>
+                                                    <?php  if($this->session->userdata('isMember')){?>
+                                                        <li><a href="<?= base_url('profile') ?>">Profil</a></li>
+                                                         <li><a href="<?= base_url('logout') ?>">Logout</a></li>
+                                                    <?php }else{?>
+                                                        <li><a href="<?= base_url('auth') ?>">Login</a></li>
+                                                         <li><a href="<?= base_url('register') ?>">Daftar Akun Baru</a></li>
+                                                    <?php }?>
+                                                  
                                                 </ul>
                                               </li>
                                             </ul>
                                         </div>
                                     </li>
+                                    <?php  if($this->session->userdata('isMember')){?>
                                     <li class="cart-icon"> 
-                                        <a href="#"> <span> <small class="cart-notification">2</small> </span> </a>
-                                        <div class="cart-dropdown header-link-dropdown">
-                                            <ul class="cart-list link-dropdown-list">
+                                        <a href="#"> <span> <small class="cart-notification" id="countCart">2</small> </span> </a>
+                                        <div class="cart-dro    pdown header-link-dropdown">
+                                            <ul class="cart-list link-dropdown-list" id="dataCart">
+                                            
                                               <li> <a class="close-cart"><i class="fa fa-times-circle"></i></a>
                                                 <figure> <a href="product-page.html" class="pull-left"> <img alt="Xpoge" src="<?= base_url() ?>template/public/images/1.jpg"></a>
                                                   <figcaption> <span><a href="product-page.html">Men's Full Sleeves Collar Shirt</a></span>
@@ -91,13 +99,17 @@
                                                   </figcaption>
                                                 </figure>
                                               </li>
+                                             
                                               
                                             </ul>
-                                            <p class="cart-sub-totle"> <span class="pull-left">Total</span> <span class="pull-right"><strong class="price-box">$29.98</strong></span> </p>
+                                            <p class="cart-sub-totle"> <span class="pull-left">Total</span> <span class="pull-right"><strong class="price-box" id="totalCart">$29.98</strong></span> </p>
                                             <div class="clearfix"></div>
                                             <div class="mt-20"> <a href="checkout.html" class="btn-color btn right-side">Keranjang</a> </div>
                                         </div>
                                     </li>
+                                    <?php }else{
+                                        echo '<li class="cart-icon"> <a href="'.base_url('auth').'"> <span> <small class="cart-notification">0</small> </span> </a></li>';
+                                    }?>
                                   </ul>
                                 </div>
                             </div>

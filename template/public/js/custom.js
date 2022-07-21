@@ -1,7 +1,109 @@
 // JavaScript Document
 $(function() {
  "use strict";
+ var getUrl = window.location;
+ var baseUrl = getUrl .protocol + "//" + getUrl.host + "/" + getUrl.pathname.split('/')[1] + "/";
     /* -------- preloader ------- */
+    $(document).on('click','.addToCart',function(){
+        var id = $(this).attr('data-produk');
+        var batch = $(this).attr('data-batch');
+        $.ajax({
+            type:'POST',
+            url:baseUrl+'site/ajax/addCart',
+            data:{produk:id,batch:batch},
+            dataType:'json',
+            beforeSend:function(){
+                $('#preloader').css('display','');
+            },success:function(resp){
+                if(resp.status == true){
+                    dataCart();
+                }else{
+                    error('Peringatan',resp.message);
+                }
+            },complete:function(){
+                $('#preloader').css('display','none');
+            }
+
+        })
+    })
+    $(document).on('click','.deleteCart',function(){
+        var rowid = $(this).attr('data-id');
+        $.ajax({
+            type:'POST',
+            url:baseUrl+'site/ajax/removeItem',
+            data:{rowid:rowid},
+            dataType:'json',
+            beforeSend:function(){
+                
+            },success:function(resp){
+                if(resp.status == true){
+                    dataCart();
+                }else{
+                    error('Peringatan','Item tidak ditemukan');
+                }
+            },complete:function(){
+               
+            }
+        })
+    })
+    $(document).on('change keyup','.qty',function(){
+        var rowid = $(this).attr('data-id');
+        var qty = $(this).val();
+        if(qty <= 0){
+            error('Peringatan','Jumlah tidak boleh kurang dari 1');
+        }else{
+            $.ajax({
+                type:'POST',
+                url:baseUrl+'site/ajax/updateCart',
+                data:{rowid:rowid,qty:qty},
+                dataType:'json',
+                beforeSend:function(){
+                    
+                },success:function(resp){
+                    if(resp.status == true){
+                        dataCart();
+                    }else{
+                        error('Peringatan',resp.message);
+                    }
+                },complete:function(){
+                   
+                }
+    
+            })
+        }
+        
+    })
+    dataCart();
+    function dataCart(){
+        $.ajax({
+            type:'POST',
+            url:baseUrl+'site/ajax/dataCart',
+            dataType:'json',
+            beforeSend:function(){
+                
+            },success:function(resp){
+                $('#dataCart').html(resp.output);
+                $('#totalCart').html(resp.subtotal);
+                $('#countCart').html(resp.count);
+            },complete:function(){
+               
+            }
+
+        })
+    }
+    function error(title,msg){
+        swal({
+            title: title,
+           
+            text:msg,
+            
+              
+            customClass: 'swal-wide',
+             type:'warning',
+            
+            })  
+    }
+    
     $(window).on("load", function() {
         $('#preloader').delay(1000).fadeOut(500);
     });

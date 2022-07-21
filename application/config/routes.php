@@ -53,7 +53,7 @@ $route['default_controller'] = 'site/main';
 $route['product'] = 'site/product';
 $route['auth'] = 'site/auth';
 $route['logout'] = 'site/logout';
-
+$route['product/(:any)/(:any)'] = 'site/product/detail/$1/$2';
 $route['register'] = 'site/register';
 $route['about'] = 'site/about';
 $route['contact'] = 'site/contact';

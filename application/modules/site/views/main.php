@@ -103,14 +103,14 @@
             <div class="product-item">
                 <div class="product-image">
                    '.$new.'
-                    <a href="'.base_url('produk/'.$pre['produk_seo'].'&batch='.$pre['pb_batch'].'').'">
+                    <a href="'.base_url('product/'.$pre['produk_seo'].'/'.$pre['pb_batch'].'').'">
                         <img src="'.$gambar.'" alt="Xpoge">
                     </a>
                 </div>
                 <div class="product-details-outer">
                     <div class="product-details">
                         <div class="product-title">
-                            <a href="'.base_url('produk/'.$pre['produk_seo'].'&batch='.$pre['pb_batch'].'').'">'.$judul.'</a>
+                            <a href="'.base_url('product/'.$pre['produk_seo'].'/'.$pre['pb_batch'].'').'">'.$judul.'</a>
                         </div>
                         <div class="price-box">
                             <span class="price">'.idr($pre['produk_harga_jual']).'</span>
@@ -120,7 +120,7 @@
                     <div class="product-details-btn">
                         <ul>
                             <li class="icon cart-icon">
-                                <a class="card" data-produk="'.encode($pre['produk_id']).'">
+                                <a class="addToCart" data-produk="'.encode($pre['produk_id']).'"  data-batch="'.encode($pre['pb_id']).'">
                                     <span></span>
                                 </a>
                             </li>
@@ -195,14 +195,14 @@
             <div class="product-item">
                 <div class="product-image">
                    '.$new.'
-                    <a href="'.base_url('produk/'.$cor['produk_seo'].'&batch='.$cor['pb_batch'].'').'">
+                    <a href="'.base_url('product/'.$cor['produk_seo'].'/'.$cor['pb_batch'].'').'">
                         <img src="'.$gambar.'" alt="Xpoge">
                     </a>
                 </div>
                 <div class="product-details-outer">
                     <div class="product-details">
                         <div class="product-title">
-                            <a href="'.base_url('produk/'.$cor['produk_seo'].'&batch='.$cor['pb_batch'].'').'">'.$judul.'</a>
+                            <a href="'.base_url('product/'.$cor['produk_seo'].'/'.$cor['pb_batch'].'').'">'.$judul.'</a>
                         </div>
                         <div class="price-box">
                             <span class="price">'.idr($cor['produk_harga_jual']).'</span>

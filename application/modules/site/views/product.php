@@ -23,9 +23,9 @@
 			              <div class="col-lg-12">
 			                <div class="short-by float-right-md"> <span>Filter Berdasarkan</span>
 			                  <div class="select-item">
-			                    <select>
-			                      <option value="" selected="selected">Pre Order</option>
-			                      <option value="">Close Order</option>
+			                    <select id="status">
+			                      <option value="open" selected="selected">Pre Order</option>
+			                      <option value="close">Close Order</option>
 			                    </select>
 			                  </div>
 			                </div>
@@ -33,7 +33,7 @@
 			            </div>
 			        </div>
 					<div class="product-section grid-view">
-						<div class="row">
+						<div class="row" id="data">
 		                	<div class="col-lg-4 col-md-4 col-6">
 		                		<div class="product-item">
 		                			<div class="product-image">
