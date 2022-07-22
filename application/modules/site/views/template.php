@@ -8,7 +8,7 @@
     <!-- Mobile Specific Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link type="image/x-icon" href="<?= base_url() ?>template/public/images/fav-icon.png" rel="icon">
-
+    <link rel="stylesheet" type="text/css" href="<?= base_url() ?>template/public/css/glass-case.css">
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="<?= base_url() ?>template/public/css/xpoge.css">
     <link rel="stylesheet" type="text/css" href="<?= base_url() ?>template/public/css/responsive.css">
@@ -104,7 +104,7 @@
                                             </ul>
                                             <p class="cart-sub-totle"> <span class="pull-left">Total</span> <span class="pull-right"><strong class="price-box" id="totalCart">$29.98</strong></span> </p>
                                             <div class="clearfix"></div>
-                                            <div class="mt-20"> <a href="checkout.html" class="btn-color btn right-side">Keranjang</a> </div>
+                                            <div class="mt-20"> <a href="<?= base_url('cart') ?>" class="btn-color btn right-side">Keranjang</a> </div>
                                         </div>
                                     </li>
                                     <?php }else{
@@ -256,6 +256,7 @@
         <script src="<?= base_url() ?>template/public/js/owl.carousel.min.js"></script>
         <script src="<?= base_url() ?>template/public/js/jquery.magnific-popup.min.js"></script>
         <script src="<?= base_url() ?>template/public/js/custom.js"></script>
+        <script src="<?= base_url() ?>template/public/js/modernizr.js"></script>
         <?php if(isset($js)){
             echo "<script  type='module' src='".$js."'></script>";
         } ?>

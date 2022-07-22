@@ -18,7 +18,28 @@ $(function() {
                 if(resp.status == true){
                     dataCart();
                 }else{
-                    error('Peringatan',resp.message);
+                    if(resp.redirect == null){
+                       
+                        error('Peringatan',resp.msg);
+                    }else{
+                       
+
+                        swal({
+                            title:'Peringatan',
+                            text: resp.msg,
+                            type: 'warning',
+                            showCancelButton: false,
+                            confirmButtonColor: '#334a65',
+                            confirmButtonText: 'OK',
+                          
+                          },function(isConfirm){
+                                    if (isConfirm) {
+                                        window.location = resp.redirect;
+                                    } else {
+                                        
+                                    }
+                            });
+                    }
                 }
             },complete:function(){
                 $('#preloader').css('display','none');
@@ -46,7 +67,7 @@ $(function() {
             }
         })
     })
-    $(document).on('change keyup','.qty',function(){
+    $(document).on('change keyup','.quantity',function(){
         var rowid = $(this).attr('data-id');
         var qty = $(this).val();
         if(qty <= 0){

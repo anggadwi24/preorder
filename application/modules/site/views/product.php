@@ -6,7 +6,7 @@
 				<h1 class="banner-title">Produk</h1>
 				<div class="breadcrumb">
                     <ul class="inline">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="<?= base_url('')?>">Home</a></li>
                         <li>Produk</li>
                     </ul>
                 </div>

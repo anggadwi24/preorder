@@ -37,38 +37,42 @@ class Ajax extends MX_Controller
             $produk = decode($this->input->post('produk'));
             $batch = decode($this->input->post('batch'));
             $redirect =null;
-         
-            $cekProduk = $this->model_app->join_where('produk','produk_batch','produk_id','pb_produk_id',array('produk_id'=>$produk,'pb_id'=>$batch));
-            if($cekProduk->num_rows() > 0){
-                $row = $cekProduk->row_array();
-                if($row['pb_status'] == 'open'){
-                    if($row['pb_tanggal_mulai'] <= date('Y-m-d H:i:s') AND $row['pb_tanggal_selesai'] >= date('Y-m-d H:i:s')){
-                        $data = array(
-                            'id' => $produk, 
-                            'batch_id'=>$batch,
-                            'name' => $row['produk_nama'],
-                            'batch' =>$row['pb_batch'],
-                            'price' => $row['produk_harga_jual'], 
-                            'image'=>$row['produk_image'],
-                            'qty' => 1, 
-                        );
-                        $this->cart->insert($data);
-                        $status = true;
-                        $msg = null;
+            if($this->session->userdata('isMember')){
+                $cekProduk = $this->model_app->join_where('produk','produk_batch','produk_id','pb_produk_id',array('produk_id'=>$produk,'pb_id'=>$batch));
+                if($cekProduk->num_rows() > 0){
+                    $row = $cekProduk->row_array();
+                    if($row['pb_status'] == 'open'){
+                        if($row['pb_tanggal_mulai'] <= date('Y-m-d H:i:s') AND $row['pb_tanggal_selesai'] >= date('Y-m-d H:i:s')){
+                            $data = array(
+                                'id' => $produk.'-'.$batch, 
+                               
+                                'name' => $row['produk_nama'],
+                                'batch' =>$row['pb_batch'],
+                                'price' => $row['produk_harga_jual'], 
+                                'image'=>$row['produk_image'],
+                                'qty' => 1, 
+                            );
+                            $this->cart->insert($data);
+                            $status = true;
+                            $msg = null;
+                        }else{
+                            $status = false;
+                            $msg = 'Tanggal Pre Order sudah selesai';
+                        }
                     }else{
                         $status = false;
-                        $msg = 'Tanggal Pre Order sudah selesai';
+                        $msg = 'Status produk close order';
                     }
                 }else{
                     $status = false;
-                    $msg = 'Status produk close order';
+                    $msg = 'Produk tidak ditemukan';
                 }
             }else{
                 $status = false;
-                $msg = 'Produk tidak ditemukan';
+				$msg = 'Login terlebih dahulu untuk melakukan order';
+				$redirect = base_url('auth');
             }
-        
-            echo json_encode(array('status'=>$status,'msg'=>$msg));
+            echo json_encode(array('status'=>$status,'msg'=>$msg,'redirect'=>$redirect));
             
         }
     }
@@ -77,40 +81,49 @@ class Ajax extends MX_Controller
             $output = null;
             $count = $this->cart->total_items() ;
             $subtotal = 0;
-            if($this->cart->total_items() <= 0){
-                $output = '  <li><span>Keranjang masih kosong</span></li>';
-            }else{
-              
-                $record = $this->cart->contents();
-                foreach($record as $row ){
-                    $subtotal = $subtotal + $row['subtotal'];
-                    $cek =  $this->model_app->join_where('produk','produk_batch','produk_id','pb_produk_id',array('produk_id'=>$row['id'],'pb_id'=>$row['batch_id']));
-                    if($cek->num_rows() > 0){
-                            $rows = $cek->row_array();
-                            if(file_exists('upload/produk/'.$row['image'])){
-                                $image = base_url('upload/produk/'.$row['image']);
-                            }else{
-                                $image = base_url('upload/produk/404.jpg');
-                            }
-                         
-                            $output .= ' <li> <a class="close-cart deleteCart" data-id="'.$row['rowid'].'"><i class="fa fa-times-circle"></i></a>
-                            <figure> 
-                                <a href="'.base_url('product/'.$rows['produk_seo'].'/'.$rows['pb_batch']).'" class="pull-left mr-1 mt-1 "> <img alt="Xpoge" src="'.$image.'" class="mr-1 img-fluid" style="width:80px;max-height:150px;min-height:120px;"></a>
-                                <figcaption > <span><a href="'.base_url('product/'.$rows['produk_seo'].'/'.$rows['pb_batch']).'">'.$row['name'].'</a></span> 
-                                    <p class="cart-price mb-1">Batch '.$row['batch'].'</p>
-                                    <p class="cart-price">'.idr($row['price']).'</p>
-                                    <div class="product-qty">
-                                    <label>Qty:</label>
-                                    <div class="custom-qty">
-                                        <input type="number" name="qty" maxlength="0" value="'.$row['qty'].'" title="Qty" class="input-text qty" data-id = "'.$row['rowid'].'">
-                                    </div>
-                                    </div>
-                                </figcaption>
-                            </figure>
-                        </li>';
+            if($this->session->userdata('isMember')){
+                if($this->cart->total_items() <= 0){
+                    $output = '  <li><span>Keranjang masih kosong</span></li>';
+                }else{
+                
+                    $record = $this->cart->contents();
+                    foreach($record as $row ){
+                        $ex = explode('-',$row['id']);
+                        $id = $ex[0];
+                        $batch = $ex[1];
+                        $subtotal = $subtotal + $row['subtotal'];
+                        $cek =  $this->model_app->join_where('produk','produk_batch','produk_id','pb_produk_id',array('produk_id'=>$id,'pb_id'=>$batch));
+                        if($cek->num_rows() > 0){
+                                $rows = $cek->row_array();
+                                if(file_exists('upload/produk/'.$row['image'])){
+                                    $image = base_url('upload/produk/'.$row['image']);
+                                }else{
+                                    $image = base_url('upload/produk/404.jpg');
+                                }
+                            
+                                $output .= ' <li> <a class="close-cart deleteCart" data-id="'.$row['rowid'].'"><i class="fa fa-times-circle"></i></a>
+                                <figure> 
+                                    <a href="'.base_url('product/'.$rows['produk_seo'].'/'.$rows['pb_batch']).'" class="pull-left mr-1 mt-1 "> <img alt="Xpoge" src="'.$image.'" class="mr-1 img-fluid" style="width:80px;max-height:150px;min-height:120px;"></a>
+                                    <figcaption > <span><a href="'.base_url('product/'.$rows['produk_seo'].'/'.$rows['pb_batch']).'">'.$row['name'].'</a></span> 
+                                        <p class="cart-price mb-1">Batch '.$row['batch'].'</p>
+                                        <p class="cart-price">'.idr($row['price']).'</p>
+                                        <div class="product-qty">
+                                        <label>Qty:</label>
+                                        <div class="custom-qty">
+                                            <input type="number" name="qty" maxlength="0" value="'.$row['qty'].'" title="Qty" class="input-text qty quantity" data-id = "'.$row['rowid'].'">
+                                        </div>
+                                        </div>
+                                    </figcaption>
+                                </figure>
+                            </li>';
+                        }
                     }
-                }
-               
+                
+                }   
+            }else{
+                $count = 0;
+                $output = null;
+                
             }
           echo json_encode(array('output'=>$output,'subtotal'=>idr($subtotal),'count'=>$count));
         }

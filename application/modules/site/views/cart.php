@@ -6,7 +6,7 @@
 							<h1 class="banner-title">Keranjang Belanja</h1>
 							<div class="breadcrumb">
 			                    <ul class="inline">
-			                        <li><a href="index.html">Home</a></li>
+			                        <li><a href="<?= base_url() ?>">Home</a></li>
 			                        <li>Keranjang Belanja</li>
 			                    </ul>
 			                </div>
@@ -16,7 +16,7 @@
 				<div class="ptb-100">
 					<div class="container">
 						<div class="cart-item-table commun-table">
-				            <div class="table-responsive">
+				            <div class="table-responsive" id="cartData">
 				              <table class="table border mb-0">
 				                <thead>
 				                  <tr>
@@ -100,7 +100,7 @@
 					                      <td>Total Produk</td>
 					                      <td>
 					                        <div class="price-box"> 
-					                          <span class="price">$160.00</span> 
+					                          <span class="price" id="total">$160.00</span> 
 					                        </div>
 					                      </td>
 					                    </tr>
@@ -108,7 +108,7 @@
 					                      <td><b>Jumlah Pembayaran</b></td>
 					                      <td>
 					                        <div class="price-box"> 
-					                          <span class="price"><b>$160.00</b></span> 
+					                          <span class="price" id="subtotal"><b>$160.00</b></span> 
 					                        </div>
 					                      </td>
 					                    </tr>
@@ -121,15 +121,19 @@
 					    </div>
 					    <hr>
 					    <div class="mt-30">
-					        <div class="row">
-					          <div class="col-12">
-					            <div class="right-side float-none-xs"> 
-					              <a href="checkout.html" class="btn btn-color">Checkout
-					                <span><i class="fa fa-angle-right"></i></span>
-					              </a> 
-					            </div>
-					          </div>
+							<div class="row">
+						        <div class="col-md-6">
+						            <div class="mt-30"> 
+						              <a href="<?= base_url('product') ?>" class="btn btn-color">
+						                <i class="fa fa-angle-left"></i><span>Lanjut Belanja</span>
+						              </a> 
+						            </div>
+						        </div>
+						        <div class="col-md-6">
+									<div class="right-side mt-30" id="buttonCheckout"> 
+						        </div>
 					        </div>
+					        
 					    </div>
 					</div>
 				</div>

@@ -55,7 +55,13 @@ _______________________________________________________*/
 	background-color: #f22a59;
 	color: #FFF;
 }
-
+.bg-produk-out{
+	outline: 41px solid rgba(179, 179, 179, 0.5) !important;
+    outline-offset: -100px;
+    overflow: hidden;
+    position: relative;
+  
+}
 * {
 	outline: none !important;
 }
