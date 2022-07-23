@@ -19,7 +19,7 @@
     </head>
     <body>
         <!-- Start preloader -->
-        <div id="preloader"></div>
+        <!-- <div id="preloader"></div> -->
         <!-- End preloader -->
 
         
@@ -83,7 +83,7 @@
                                     <?php  if($this->session->userdata('isMember')){?>
                                     <li class="cart-icon"> 
                                         <a href="#"> <span> <small class="cart-notification" id="countCart">2</small> </span> </a>
-                                        <div class="cart-dro    pdown header-link-dropdown">
+                                        <div class="cart-dropdown header-link-dropdown">
                                             <ul class="cart-list link-dropdown-list" id="dataCart">
                                             
                                               <li> <a class="close-cart"><i class="fa fa-times-circle"></i></a>

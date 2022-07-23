@@ -997,7 +997,7 @@ header.header-fixed {
 		-moz-border-radius: 5px;
 		-webkit-border-radius: 5px;
 		-o-border-radius: 5px;
-	    max-width: 50px;
+	    max-width: 80px;
 	    padding: 4px 13px;
 	    float: left;
 	    text-align: center;
@@ -2535,7 +2535,7 @@ _______________________________________________________*/
 	}
 	.input-text.qty {
 		border: 1px solid #e5e5e5;
-		max-width: 40px;
+		max-width: 80px;
 		padding: 4px 0;
 		float: left;
 		text-align: center;

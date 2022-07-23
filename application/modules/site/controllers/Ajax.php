@@ -101,11 +101,13 @@ class Ajax extends MX_Controller
                                     $image = base_url('upload/produk/404.jpg');
                                 }
                             
-                                $output .= ' <li> <a class="close-cart deleteCart" data-id="'.$row['rowid'].'"><i class="fa fa-times-circle"></i></a>
+                                $output .= ' <li> 
+                                <a class="close-cart deleteCart" data-id="'.$row['rowid'].'"><i class="fa fa-times-circle"></i></a>
                                 <figure> 
-                                    <a href="'.base_url('product/'.$rows['produk_seo'].'/'.$rows['pb_batch']).'" class="pull-left mr-1 mt-1 "> <img alt="Xpoge" src="'.$image.'" class="mr-1 img-fluid" style="width:80px;max-height:150px;min-height:120px;"></a>
-                                    <figcaption > <span><a href="'.base_url('product/'.$rows['produk_seo'].'/'.$rows['pb_batch']).'">'.$row['name'].'</a></span> 
-                                        <p class="cart-price mb-1">Batch '.$row['batch'].'</p>
+                                    <a href="'.base_url('product/'.$rows['produk_seo'].'/'.$rows['pb_batch']).'" class="pull-left"> <img alt="Xpoge" src="'.$image.'" class="img-fluid"></a>
+                                    <figcaption > 
+                                        <p class="cart-price" style="font-size:11px; line-height:0px;">Batch '.$row['batch'].'</p>
+                                        <span><a href="'.base_url('product/'.$rows['produk_seo'].'/'.$rows['pb_batch']).'">'.$row['name'].'</a></span> 
                                         <p class="cart-price">'.idr($row['price']).'</p>
                                         <div class="product-qty">
                                         <label>Qty:</label>

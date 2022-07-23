@@ -167,19 +167,19 @@ class Checkout extends MX_Controller
 												</div>
 											</div>
 											<div class="row">
-												<div class="col-md-6 col-12">
+												<div class="col-md-4 col-12">
 													<div class="form-group">
 														<label for="zip">Nama</label>
 														<input type="text" required="" name="nama" value="'.$user['member_nama'].'">
 													</div>
 												</div>
-												<div class="col-md-6 col-12">
+												<div class="col-md-4 col-12">
 													<div class="form-group">
 														<label for="city">No telp</label>
 														<input  type="text" required="" name="no_telp" value="'.$user['member_no_telp'].'">
 													</div>
 												</div>
-												<div class="col-12">
+												<div class="col-md-4 col-12">
 													<div class="form-group">
 														<label for="email">Email</label>
 														<input id="email" type="email" required name="email" value="'.$user['member_email'].'" >
@@ -216,11 +216,34 @@ class Checkout extends MX_Controller
 												</div>
 												<div class="col-12">
 													<div class="form-group">
-														<h4>Catatan</h4>
+														<label for="city">Catatan</label>
 														<textarea name="catatan"></textarea>
 													</div>
 												</div>
-										</div>
+												<div class="col-12">
+													<div class="form-group">
+														<h4>Ekspedisi</h4>
+													</div>
+												</div>
+												<div class="col-md-6 col-12">
+													<div class="form-group">
+														<label for="city">Kurir</label>
+														<select name="kurir" id="kurir">
+															<option>JNE</option>
+															<option>J&T</option>
+														</select>
+													</div>
+												</div>
+												<div class="col-md-6 col-12">
+													<div class="form-group">
+														<label for="city">Service</label>
+														<select name="kurir" id="kurir">
+															<option>OKE - Rp.20.000</option>
+															<option>REG - Rp.20.000</option>
+														</select>
+													</div>
+												</div>
+											</div>
 											</div>
 										</div>
 										<div class="row">
@@ -233,7 +256,6 @@ class Checkout extends MX_Controller
 										<h3>Pesanan Anda</h3>
 									</div>
 									<div class="checkout-products sidebar-product mb-60">
-
 										'.$product.'
 									</div>
 									<hr><br>
