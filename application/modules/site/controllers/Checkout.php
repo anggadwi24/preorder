@@ -11,7 +11,7 @@ class Checkout extends MX_Controller
 			$this->load->model('model_app','',TRUE);
 			$this->id = decode($this->session->userdata['isMember']['member_id']);
 		}else{
-			redirect('auth');
+			// redirect('auth');
 		}
 	}
 
@@ -26,6 +26,143 @@ class Checkout extends MX_Controller
 			redirect('cart');
 		}
 		
+	}
+	function checkingEkspedisi(){
+		if($this->input->method() == 'post'){
+			$output = null;
+			$this->form_validation->set_rules('ekspedisi','Ekspedisi','required');
+            $this->form_validation->set_rules('kabupaten','Kabupaten','required');
+			$ekspedisi = $this->input->post('ekspedisi');
+			$destination = $this->input->post('kabupaten');
+			$origin = 128;
+			$weight = 0;
+			
+			if($this->form_validation->run() == FALSE){
+				$status = false;
+				$replace = array('<p>','</p>');
+				$msg = replace($replace,validation_errors());
+			}else{
+				if( $this->cart->total_items() > 0){
+			
+
+					$record = $this->cart->contents();
+					foreach($record as $row ){
+						$ex = explode('-',$row['id']);
+						$id = $ex[0];
+						$batch = $ex[1];
+					
+						$cek =  $this->model_app->join_where('produk','produk_batch','produk_id','pb_produk_id',array('produk_id'=>$id,'pb_id'=>$batch));
+						if($cek->num_rows() > 0){
+							$rows = $cek->row_array();
+							if($rows['pb_status'] == 'close'){
+								
+							}else{
+								if($rows['pb_tanggal_mulai'] >= date('Y-m-d H:i:s') AND $rows['pb_tanggal_selesai'] <= date('Y-m-d H:i:s')){
+	
+								}else{
+									$weight += $rows['produk_berat']+$weight;
+								}
+							}
+						}
+						
+					}
+				
+					$this->load->library('rajaongkir',NULL,'ongkir');
+					$resp = $this->ongkir->getCost($origin,'city',$destination,'city',$weight,$ekspedisi);
+					if($resp['status'] == false){
+						$status = false;
+						$msg = $resp['message']['rajaongkir']['status']['description'];
+					}else{
+						$status = true;
+						$msg = null;
+						$response = json_decode($resp['output'],true);
+						$opt = $response['rajaongkir']['results'][0]['costs'];
+						// $output = $opt;
+						if($opt != ""){
+							$output .= '<option disabled selected></option>';
+							foreach($opt as $op){
+								if($op['cost'][0]['etd'] == ''){
+									$estimasi = '';
+								}else{
+									$estimasi = $op['cost'][0]['etd'].' hari';
+								}
+								$output .= "<option value='".$op['service']."' data-services='".encode($op['cost'][0]['value'])."' data-estimate='".$estimasi." Hari'>".$op['service'].' - '.$op['description']."</option>";
+							}
+						}else{
+							$status = false;
+							$msg = 'Service ekspedisi tidak tersedia';
+						}
+						
+					}
+					
+				}else{
+					$status = false;
+					$msg = 'Keranjang masih kosong';
+				}
+			}
+			echo json_encode(array('status'=>$status,'msg'=>$msg,'output'=>$output));
+		}else{
+			redirect('cart');
+		}
+	}
+	function service(){
+		if($this->input->method() == 'post'){
+			$this->form_validation->set_rules('ser','Services','required');
+            $this->form_validation->set_rules('est','Estimasi','required');
+			$ser = decode($this->input->post('ser'));
+			$est = $this->input->post('est');
+			$total = 0;
+			$arr = null;
+			if($this->form_validation->run() == FALSE){
+				$status = false;
+				$replace = array('<p>','</p>');
+				$msg = replace($replace,validation_errors());
+			}else{
+				if($this->form_validation->run() == FALSE){
+					$status = false;
+					$replace = array('<p>','</p>');
+					$msg = replace($replace,validation_errors());
+				}else{
+					if( $this->cart->total_items() > 0){
+				
+	
+						$record = $this->cart->contents();
+						foreach($record as $row ){
+							$ex = explode('-',$row['id']);
+							$id = $ex[0];
+							$batch = $ex[1];
+						
+							$cek =  $this->model_app->join_where('produk','produk_batch','produk_id','pb_produk_id',array('produk_id'=>$id,'pb_id'=>$batch));
+							if($cek->num_rows() > 0){
+								$rows = $cek->row_array();
+								if($rows['pb_status'] == 'close'){
+									
+								}else{
+									if($rows['pb_tanggal_mulai'] >= date('Y-m-d H:i:s') AND $rows['pb_tanggal_selesai'] <= date('Y-m-d H:i:s')){
+		
+									}else{
+										$total += $rows['produk_harga_jual']+$total;
+									}
+								}
+							}
+							
+						}
+						$status = true;
+						$msg = null;
+						$ongkir = idr($ser).'<br>'.$est;
+						$subtotal = $total + $ser;
+						$arr = array('ongkir'=>$ongkir,'subtotal'=>idr($subtotal));
+					}else{
+						$status = false;
+						$msg = 'Keranjang masih kosong';
+					}
+					
+				}
+			}
+			echo json_encode(array('status'=>$status,'msg'=>$msg,'arr'=>$arr));
+		}else{
+			redirect('cart');
+		}
 	}
 	function data(){
 		if($this->input->method() == 'post'){
@@ -150,11 +287,11 @@ class Checkout extends MX_Controller
 				
 				$product .=' </ul>';
 				if($have == true){
-					$button = '<button class="btn full btn-color">Pembayaran</button>';
+					$button = '<button class="btn full btn-color" id="buttonCheckout" disabled>Pembayaran</button>';
 				}else{
 					$button = '';
 				}
-				$output .= '<form class="main-form">
+				$output .= '<form class="main-form" id="formAct">
 							<div class="row">
 								<div class="col-12 col-lg-8">
 									<div class="mb-md-30">
@@ -229,17 +366,19 @@ class Checkout extends MX_Controller
 													<div class="form-group">
 														<label for="city">Kurir</label>
 														<select name="kurir" id="kurir">
-															<option>JNE</option>
-															<option>J&T</option>
+															<option selected disabled></option>
+
+															<option value="jne">JNE</option>
+															<option value="jnt">J&T</option>
+															
 														</select>
 													</div>
 												</div>
 												<div class="col-md-6 col-12">
 													<div class="form-group">
 														<label for="city">Service</label>
-														<select name="kurir" id="kurir">
-															<option>OKE - Rp.20.000</option>
-															<option>REG - Rp.20.000</option>
+														<select name="service" id="service">
+															<option selected disabled></option>
 														</select>
 													</div>
 												</div>
@@ -268,16 +407,16 @@ class Checkout extends MX_Controller
 												<td>'.fullDate(date('Y-m-d')).'</td>
 											</tr>
 											<tr>
-												<td><b>Pengiriman:</b></td>
-												<td><div class="price-box"> $160.00 </div></td>
+												<td><b>Ongkos Kirim:</b></td>
+												<td><div class="price-box" id="ongkir">Pilih Ekspedisi</div></td>
 											</tr>
 											<tr>
 												<td><b>Total :</b></td>
-												<td><div class="price-box"> '.idr($total).'</div></td>
+												<td><div class="price-box" id="total"> '.idr($total).'</div></td>
 											</tr>
 											<tr>
 												<td><b>Sub Total :</b></td>
-												<td><div class="price-box"> <span class="price">$160.00</span> </div></td>
+												<td><div class="price-box"> <span class="price" id="subtotal">'.idr($total).'</span> </div></td>
 											</tr>
 											
 											</tbody>
