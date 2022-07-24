@@ -19,7 +19,7 @@
     </head>
     <body>
         <!-- Start preloader -->
-        <!-- <div id="preloader"></div> -->
+        <div id="preloader"></div>
         <!-- End preloader -->
 
         

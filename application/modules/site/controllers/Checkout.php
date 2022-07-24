@@ -27,6 +27,179 @@ class Checkout extends MX_Controller
 		}
 		
 	}
+
+	function do (){
+		if($this->input->method() == 'post'){
+			$this->load->library('form_validation');
+			$this->form_validation->set_rules('nama', 'Nama', 'trim|required');
+			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+			$this->form_validation->set_rules('no_telp', 'No. Telepon', 'trim|required');
+			$this->form_validation->set_rules('alamat', 'Alamat', 'trim|required');
+			$this->form_validation->set_rules('provinsi', 'Provinsi', 'trim|required');
+			$this->form_validation->set_rules('kabupaten', 'Kabupaten', 'trim|required');
+			$this->form_validation->set_rules('kode_pos', 'Kode Pos', 'trim|required');
+			$this->form_validation->set_rules('kurir', 'Kurir', 'trim|required');
+			$this->form_validation->set_rules('service', 'Layanan', 'trim|required');
+			$this->form_validation->set_rules('ongkir', 'Ongkir', 'trim|required');
+
+
+			if($this->form_validation->run() == FALSE){
+				$status = false;
+				$replace = array('<p>','</p>');
+				$msg = replace($replace,validation_errors());
+			}else{
+				if( $this->cart->total_items() > 0){
+					$member_id = $this->id;
+					$nama = $this->input->post('nama');
+					$email = $this->input->post('email');
+					$no_telp = $this->input->post('no_telp');
+					$alamat = $this->input->post('alamat');
+					$provinsi = $this->input->post('provinsi');
+					$kabupaten = $this->input->post('kabupaten');
+					$kode_pos = $this->input->post('kode_pos');
+					$kurir = $this->input->post('kurir');
+					$service = $this->input->post('service');
+					$ongkir = decode($this->input->post('ongkir'));
+					$catatan = $this->input->post('catatan');
+					$total = 0;
+					$berat = 0;
+					$trans_no = $this->model_app->generateTransaksi();
+					$record = $this->cart->contents();
+					foreach($record as $row ){
+						$ex = explode('-',$row['id']);
+						$id = $ex[0];
+						$batch = $ex[1];
+					
+						$cek =  $this->model_app->join_where('produk','produk_batch','produk_id','pb_produk_id',array('produk_id'=>$id,'pb_id'=>$batch));
+						if($cek->num_rows() > 0){
+							$rows = $cek->row_array();
+							if($rows['pb_status'] == 'close'){
+								
+							}else{
+								if($rows['pb_tanggal_mulai'] >= date('Y-m-d H:i:s') AND $rows['pb_tanggal_selesai'] <= date('Y-m-d H:i:s')){
+	
+								}else{
+									$total = $total + ($rows['produk_harga_jual'] * $row['qty']);
+									$berat = $berat + ($rows['produk_berat'] * $row['qty']);
+								}
+							}
+						}
+						
+					}
+					$subtotal = $total+$ongkir;
+					$data = array('transaksi_no'=>$trans_no,'transaksi_member_id'=>$member_id,'transaksi_member_nama'=>$nama,
+								  'transaksi_member_email'=>$email,'transaksi_member_no_telp'=>$no_telp,'transaksi_member_alamat'=>$alamat,
+								  'transaksi_member_provinsi'=>$provinsi,'transaksi_member_kabupaten'=>$kabupaten,'transaksi_member_kode_pos'=>$kode_pos,
+								  'transaksi_ekspedisi'=>$kurir,'transaksi_service'=>$service,'transaksi_ongkir'=>$ongkir,'transaksi_total'=>$total,'transaksi_berat'=>$berat,
+								  'transaksi_subtotal'=>$subtotal,'transaksi_status'=>'waiting','transaksi_catatan'=>$catatan);
+					$transaksi_id = $this->model_app->insert_id('transaksi',$data);
+					foreach($record as $row ){
+						$ex = explode('-',$row['id']);
+						$id = $ex[0];
+						$batch = $ex[1];
+					
+						$cek =  $this->model_app->join_where('produk','produk_batch','produk_id','pb_produk_id',array('produk_id'=>$id,'pb_id'=>$batch));
+						if($cek->num_rows() > 0){
+							$rows = $cek->row_array();
+							if($rows['pb_status'] == 'close'){
+								
+							}else{
+								if($rows['pb_tanggal_mulai'] >= date('Y-m-d H:i:s') AND $rows['pb_tanggal_selesai'] <= date('Y-m-d H:i:s')){
+	
+								}else{
+									$dataD['td_transaksi_id'] = $transaksi_id;
+									$dataD['td_produk_id'] = $rows['produk_id'];
+									$dataD['td_pb_id'] = $rows['pb_id'];
+									$dataD['td_harga'] = $rows['produk_harga_jual'];
+									$dataD['td_qty'] = $row['qty'];
+									$dataD['td_subtotal'] = $rows['produk_harga_jual'] * $row['qty'];
+									$dataD['td_berat'] = $rows['produk_berat'] * $row['qty'];
+
+									$this->model_app->insert('transaksi_detail',$dataD);
+
+									$items[] = [
+										array(
+											'id' 		=> $transaksi_id,
+											'price' 	=> $rows['produk_harga_jual'],
+											'quantity' 	=> $row['qty'],
+											'name' 		=> $rows['produk_nama'].' - '.$rows['pb_batch']
+										),
+									   
+									];
+								}
+							}
+						}
+						
+					}
+					$params = array('server_key' => 'SB-Mid-server-I6l10VS8lpAfy6F1pZLIkE-r', 'production' => false);
+					$this->load->library('veritrans');
+					$this->veritrans->config($params);
+					$transaction_details = array(
+						'order_id' 		=>$trans_no,
+						'gross_amount' 	=> $subtotal
+					);
+			
+					// Populate items
+					
+					$items[] = [
+						array(
+							'id' 		=> $service,
+							'price' 	=> $ongkir,
+							'quantity' 	=> 1,
+							'name' 		=> $kurir.' - '.$service
+						),
+					   
+					];
+				   
+					$customer_details = array(
+					
+						'name' 					=> $nama,
+						'email' 				=> $email,
+						'phone' 				=>$no_telp,
+					   
+						);
+			
+					// Data yang akan dikirim untuk request redirect_url.
+					// Uncomment 'credit_card_3d_secure' => true jika transaksi ingin diproses dengan 3DSecure.
+					$transaction_data = array(
+						'payment_type' 			=> 'vtweb', 
+						'vtweb'					=> array(
+						//'enabled_payments' 	=> ['credit_card'],
+						'credit_card_3d_secure' => true
+						),
+						'transaction_details'	=> $transaction_details,
+						'item_details' 			=> $items,
+						'customer_details' 	 	=> $customer_details
+					);
+				
+					try
+					{
+						$redirect = base_url('checkout/done?transaksi='.$trans_no);
+						$this->session->set_userdata('redirect',$redirect);
+
+						$status = true;
+						$msg = $this->veritrans->vtweb_charge($transaction_data);
+						$this->model_app->update('transaksi',array('transaksi_url_payment'=>$msg),array('transaksi_id'=>$transaksi_id));
+						$this->cart->destroy();
+
+					} 
+					catch (Exception $e) 
+					{
+						$status = false;
+						$msg = $e->getMessage();	
+					}
+					
+				}else{
+					$status = false;
+					$msg = 'Keranjang masih kosong';
+				}
+			}
+			echo json_encode(array('status'=>$status,'msg'=>$msg));
+		
+		}else{
+			redirect('checkout');
+		}
+	}
 	function checkingEkspedisi(){
 		if($this->input->method() == 'post'){
 			$output = null;
@@ -141,7 +314,7 @@ class Checkout extends MX_Controller
 									if($rows['pb_tanggal_mulai'] >= date('Y-m-d H:i:s') AND $rows['pb_tanggal_selesai'] <= date('Y-m-d H:i:s')){
 		
 									}else{
-										$total += $rows['produk_harga_jual']+$total;
+										$total = ($rows['produk_harga_jual']*$row['qty'])+$total;
 									}
 								}
 							}
@@ -164,6 +337,7 @@ class Checkout extends MX_Controller
 			redirect('cart');
 		}
 	}
+	
 	function data(){
 		if($this->input->method() == 'post'){
 			$output = null;
@@ -258,7 +432,7 @@ class Checkout extends MX_Controller
 							}else{
 							
 								$have = true;
-								$total += $total + $row['subtotal'];
+								$total = $total + $row['subtotal'];
 								$product .= '<li>
 												<div class="pro-media"> <a href="'.base_url('product/'.$rows['produk_seo'].'/'.$rows['pb_batch']).'"><img alt="Xpoge" src="'.$image.'"></a> </div>
 												<div class="pro-detail-info"> <a href="'.base_url('product/'.$rows['produk_seo'].'/'.$rows['pb_batch']).'" class="product-title">'.$rows['produk_nama'].' ('.$rows['pb_batch'].')</a>
@@ -438,9 +612,104 @@ class Checkout extends MX_Controller
 		}
 	}
 
-	function detail()
+	function detail($no)
 	{
-		$this->template->load('template','checkout_detail');
+		$cek = $this->model_app->view_where('transaksi',array('transaksi_no'=>$no,'transaksi_member_id'=>$this->id));
+		if($cek->num_rows() > 0){
+			$row = $cek->row_array();
+			$data['title'] = $row['transaksi_no'].' - '.title();
+			$data['asal'] = $this->model_app->join_where('provinsi','kota','provinsi_id','kota_provinsi_id',array('kota_id'=>$row['transaksi_member_kabupaten']))->row_array();
+
+			$data['row'] = $row;
+			$this->template->load('template','checkout_detail',$data);
+
+		}else{
+			$this->session->set_flashdata('error','Maaf, transaksi tidak ditemukan');
+			redirect('');
+		}
+	}
+	function tracking($no)
+	{
+		$cek = $this->model_app->view_where('transaksi',array('transaksi_no'=>$no,'transaksi_member_id'=>$this->id));
+		if($cek->num_rows() > 0){
+			$row = $cek->row_array();
+			if($row['transaksi_status'] == 'dibayar' OR $row['transaksi_status'] == 'selesai'){
+				$data['title'] = $row['transaksi_no'].' - '.title();
+				$payment = $this->model_app->view_where('payment',array('pay_transaksi_id'=>$row['transaksi_id']));
+				if($payment->num_rows() > 0){
+					$pay = $payment->row_array();
+					$data['payment'] = '  <div class="order-track-step">
+					<div class="order-track-status">
+						<span class="order-track-status-dot"></span>
+						<span class="order-track-status-line"></span>
+					</div>
+					<div class="order-track-text">
+						<p class="order-track-text-stat">Pesanan diproses admin</p>
+						<span class="order-track-text-sub">'.tanggalwaktu($pay['pay_date']).'</span>
+					</div>
+				</div>';
+				}else{
+					$data['payment'] = '';
+				}
+				$data['asal'] = $this->model_app->join_where('provinsi','kota','provinsi_id','kota_provinsi_id',array('kota_id'=>$row['transaksi_member_kabupaten']))->row_array();
+				$data['js'] = base_url('template/public/ajax/produk/ajax-tracking.js');
+				$data['row'] = $row;
+				$this->template->load('template','tracking',$data);
+			}else{
+				if($row['transaksi_status'] == 'waiting'){
+					$this->session->set_flashdata('error','Transaksi dalam proses pembayaran');
+					redirect('order/'.$no);
+				}else{
+					$this->session->set_flashdata('error','Transaksi sudah kadarluwasa');
+					redirect('order/'.$no);
+				}
+			}
+			
+
+		}else{
+			$this->session->set_flashdata('error','Maaf, transaksi tidak ditemukan');
+			redirect('');
+		}
+	}
+	function dataTracking(){
+		if($this->input->method() == 'post'){
+			$id = decode($this->input->post('id'));
+			$output = null;
+			$cek = $this->model_app->view_where('transaksi',array('transaksi_id'=>$id,'transaksi_member_id'=>$this->id));
+			if($cek->num_rows() > 0){
+				$row = $cek->row_array();
+				if($row['transaksi_no_resi'] != NULL){
+					$this->load->library('rajaongkir',NULL,'rajaongkir');
+					$response = $this->rajaongkir->getWaybill($row['transaksi_no_resi'],$row['transaksi_ekspedisi']);
+					if($response['status'] == true){
+						$resp = json_decode($response['output'],true);
+						if($resp['rajaongkir']['result']['manifest'] != ''){
+							$data = $resp['rajaongkir']['result']['manifest'];
+							// $output .= '<div class="row">';
+							foreach($data as $val){
+								$output .= ' <div class="order-track-step">
+								<div class="order-track-status">
+									<span class="order-track-status-dot"></span>
+									<span class="order-track-status-line"></span>
+								</div>
+								<div class="order-track-text">
+									<p class="order-track-text-stat">'.$val['manifest_description'].' ('.$val['city_name'].') </p>
+									<span class="order-track-text-sub">'.tanggalwaktu($val['manifest_date'].' '.$val['manifest_time']).'</span>
+								</div>
+							</div>';
+								// $output .= '<div class="col-12"><div class="row"><div class="col-4">'.tanggalwaktu($val['manifest_date'].' '.$val['manifest_time']).'</div><div class="col-8">'.$val['city_name'].' ('.$val['manifest_description'].')</div></div></div>';
+							}
+							// $output .= '</div>';
+						}
+					
+					}
+					
+				}
+			}
+			echo json_encode($output);
+		}else{
+			redirect('');
+		}
 	}
 
 }

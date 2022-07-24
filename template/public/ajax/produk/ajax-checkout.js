@@ -164,12 +164,12 @@ data();
             },success:function(resp){
                 
                 if(resp.status == true){
-                    $('input').val('');
-                    $('select').val('');
-                    $('textarea').val('');
+                    // $('input').val('');
+                    // $('select').val('');
+                    // $('textarea').val('');
     
                     
-                    successBack('Berhasil',resp.msg,resp.redirect);
+                    window.location = resp.msg;
                 }else{
                     error('Peringatan',resp.msg);
                 }

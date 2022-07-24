@@ -86,7 +86,21 @@ class Model_app extends CI_model{
         return $this->db->get($table);
         
     }
-
+    function generateTransaksi()
+    {
+       
+			$pre = 'KPOP'.mdate("%y%m",time());	
+			$query = " SELECT * FROM transaksi WHERE transaksi_no LIKE '$pre%' ORDER BY transaksi_no DESC LIMIT 1";
+			$query = $this->db->query($query);
+			$rsv_no = "$pre"."00";
+			foreach($query->result() as $row){
+				$rsv_no = $row->transaksi_no;
+			}
+			// echo $rsv_no;
+			$rsv_no = substr($rsv_no,4) + 1;
+			// echo substr($rsv_no,4);
+			return  "KPOP".$rsv_no;
+    }
     public function view_join_one($table1,$table2,$field,$order,$ordering){
         $this->db->select('*');
         $this->db->from($table1);
@@ -124,6 +138,15 @@ class Model_app extends CI_model{
         $this->db->from($table1);
         $this->db->join($table2, $table1.'.'.$field1.'='.$table2.'.'.$field2);
         $this->db->where($where);
+        $this->db->order_by($order,$ordering);
+        return $this->db->get();
+    }
+    public function join_where_order_group_by($table1,$table2,$field1,$field2,$where,$order,$ordering,$group){
+        $this->db->select('*');
+        $this->db->from($table1);
+        $this->db->join($table2, $table1.'.'.$field1.'='.$table2.'.'.$field2);
+        $this->db->where($where);
+        $this->db->group_by($group);
         $this->db->order_by($order,$ordering);
         return $this->db->get();
     }

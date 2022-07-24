@@ -57,10 +57,20 @@ $route['cart'] = 'site/profile/cart';
 
 $route['product/(:any)/(:any)'] = 'site/product/detail/$1/$2';
 $route['product/(:any)'] = 'site/product/detail/$1';
+$route['order/(:any)'] = 'site/checkout/detail/$1';
+$route['tracking/(:any)'] = 'site/checkout/tracking/$1';
+
+
 
 $route['register'] = 'site/register';
 $route['about'] = 'site/about';
 $route['contact'] = 'site/contact';
+$route['settlement'] = 'site/settlement';
+$route['unfinish'] = 'site/settlement/unfinish';
+$route['error'] = 'site/settlement/error';
+
+
+
 
 $route['checkout'] = 'site/checkout';
 $route['checkout/detail'] = 'site/checkout/detail';

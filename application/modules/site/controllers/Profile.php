@@ -9,6 +9,7 @@ class Profile extends MX_Controller
         parent::__construct();
 		if($this->session->userdata('isMember')){
 			$this->load->model('model_app','',TRUE);
+			$this->id = decode($this->session->userdata['isMember']['member_id']);
 		}else{
 			redirect('auth');
 		}
@@ -19,8 +20,88 @@ class Profile extends MX_Controller
 
 	public function index()
 	{
+		$row = $this->model_app->view_where('member',array('member_id'=>$this->id))->row_array();
+		$data['row'] = $row;
+		$data['asal'] = $this->model_app->join_where('provinsi','kota','provinsi_id','kota_provinsi_id',array('kota_id'=>$row['member_kabupaten']))->row_array();
+		$data['provinsi'] = $this->model_app->view_order('provinsi','provinsi_nama','ASC');
+		$data['record'] = $this->model_app->join_where_order_group_by('transaksi','transaksi_detail','transaksi_id','td_transaksi_id',array('transaksi_member_id'=>$this->id),'transaksi_id','DESC','transaksi_id');
+		$data['js'] = base_url('template/public/ajax/member/ajax-edit.js');
 		$data['title'] = 'Profil - '.title();
 		$this->template->load('template','profil',$data);
+	}
+	function change(){
+		if($this->input->method() == 'post'){
+			$this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
+			$this->form_validation->set_rules('repass', 'Confirm Password', 'required|matches[password]');
+			if($this->form_validation->run() == FALSE){
+				$status = false;
+				$replace = array('<p>','</p>');
+				$msg = replace($replace,validation_errors());
+				$this->session->set_flashdata('error',$msg);
+				redirect('profile');
+			}else{
+				$data = array('member_password'=>sha1($this->input->post('password')));
+				$this->model_app->update('member',$data,array('member_id'=>$this->id));
+				$status = true;
+				$msg = 'Password berhasil diubah';
+				$this->session->set_flashdata('success',$msg);
+				redirect('profile');
+			}
+		}else{
+			redirect('profile');
+		}
+	}
+	function update(){
+		if($this->input->method() == 'post'){
+			$this->form_validation->set_rules('nama','Nama','min_length[3]|max_length[255]|required');
+			$this->form_validation->set_rules('no_telp','Nomor Telepon','min_length[10]|max_length[20]|required');
+			$this->form_validation->set_rules('alamat','Alamat','required');
+			$this->form_validation->set_rules('provinsi','Provinsi','required');
+			$this->form_validation->set_rules('kabupaten','Kabupaten','required');
+			$this->form_validation->set_rules('kode_pos','Kode Pos','required');
+			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+			if($this->form_validation->run() == FALSE){
+				$status = false;
+				$replace = array('<p>','</p>');
+				$msg = replace($replace,validation_errors());
+				$this->session->set_flashdata('error',$msg);
+				redirect('profile');
+			}else{
+				$row = $this->model_app->view_where('member',array('member_id'=>$this->id))->row_array();
+				$nama = $this->input->post('nama');
+				$no_telp = $this->input->post('no_telp');
+				$alamat = $this->input->post('alamat');
+				$provinsi = $this->input->post('provinsi');
+				$kabupaten = $this->input->post('kabupaten');
+				$kode_pos = $this->input->post('kode_pos');
+				$email = $this->input->post('email');
+				if($row['member_email'] != $email){
+					$cek = $this->model_app->view_where('member',array('member_email'=>$email,'member_id !='=>$this->id))->num_rows();
+					if($cek > 0){
+						$status = false;
+						$msg = 'Email sudah digunakan';
+						$this->session->set_flashdata('error',$msg);
+						redirect('profile');
+					}else{
+						$data = array('member_nama'=>$nama,'member_no_telp'=>$no_telp,'member_alamat'=>$alamat,'member_provinsi'=>$provinsi,'member_kabupaten'=>$kabupaten,'member_kode_pos'=>$kode_pos,'member_email'=>$email);
+						$this->model_app->update('member',$data,array('member_id'=>$this->id));
+						$msg = 'Profil berhasil diubah';
+						$this->session->set_flashdata('success',$msg);
+						redirect('profile');
+
+					}
+				}else{
+					$data = array('member_nama'=>$nama,'member_no_telp'=>$no_telp,'member_alamat'=>$alamat,'member_provinsi'=>$provinsi,'member_kabupaten'=>$kabupaten,'member_kode_pos'=>$kode_pos,'member_email'=>$email);
+					$this->model_app->update('member',$data,array('member_id'=>$this->id));
+					$msg = 'Profil berhasil diubah';
+					$this->session->set_flashdata('success',$msg);
+					redirect('profile');
+				}
+				
+			}
+		}else{
+			redirect('profile');
+		}
 	}
 	function cart(){
 		$data['title'] = 'Cart - '.title();
