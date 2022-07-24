@@ -63,6 +63,8 @@ $route['about'] = 'site/about';
 $route['contact'] = 'site/contact';
 
 $route['checkout'] = 'site/checkout';
+$route['checkout/detail'] = 'site/checkout/detail';
+$route['checkout'] = 'site/checkout';
 $route['profile'] = 'site/profile';
 $route['product/detail'] = 'site/product/detail';
 

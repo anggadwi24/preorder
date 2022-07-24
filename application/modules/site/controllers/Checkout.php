@@ -437,4 +437,13 @@ class Checkout extends MX_Controller
 			
 		}
 	}
+
+	function detail()
+	{
+		$this->template->load('template','checkout_detail');
+	}
+
 }
+
+
+
